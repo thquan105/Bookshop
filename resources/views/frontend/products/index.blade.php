@@ -1,5 +1,6 @@
 @extends('frontend.layout')
-@title('Products')
+
+@section('title', 'Products')
 
 @section('content')
 

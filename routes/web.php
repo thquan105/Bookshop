@@ -25,7 +25,19 @@ Route::get('products', function () {
     return view('frontend.products.index');
 })->name('products.index');
 
+Route::get('products/detail', function () {
+    return view('frontend.products.detail');
+})->name('products.detail');
+
 Route::get('carts', function () {
     return view('frontend.carts.index');
 })->name('carts.index');
+
+Route::get('about', function () {
+    return view('frontend.other.about');
+})->name('about');
+
+Route::get('contact', function () {
+    return view('frontend.other.contact');
+})->name('contact');
 

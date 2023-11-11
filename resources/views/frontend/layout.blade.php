@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Home Page</title>
+    <title>@yield('title') | Book Shop</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -83,7 +83,7 @@
                     <!-- Menu desktop -->
                     <div class="menu-desktop">
                         <ul class="main-menu">
-                            <li  class="{{ Route::is('home') ? 'active-menu' : '' }}">
+                            <li class="{{ Route::is('home') ? 'active-menu' : '' }}">
                                 <a href="{{ route('home') }}">Home</a>
                                 {{-- <ul class="sub-menu">
                                     <li><a href="index.html">Homepage 1</a></li>
@@ -104,12 +104,12 @@
                                 <a href="blog.html">Blog</a>
                             </li>
 
-                            <li>
-                                <a href="about.html">About</a>
+                            <li class="{{ Route::is('about') ? 'active-menu' : '' }}">
+                                <a href="{{ route('about') }}">About</a>
                             </li>
 
-                            <li>
-                                <a href="contact.html">Contact</a>
+                            <li class="{{ Route::is('contact') ? 'active-menu' : '' }}">
+                                <a href="{{ route('contact') }}">Contact</a>
                             </li>
                         </ul>
                     </div>
@@ -125,7 +125,8 @@
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
 
-                        <a href="{{ route('wishlists.index') }}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+                        <a href="{{ route('wishlists.index') }}"
+                            class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
                             data-notify="0">
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
@@ -250,9 +251,7 @@
         </div>
     </header>
 
-
-    @yield('cart-sidebar')
-
+    @include('frontend.carts.cart')
 
     @yield('content')
 
@@ -585,6 +584,7 @@
             </div>
         </div>
     </div>
+    <!-- all js -->
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
     <!--===============================================================================================-->
@@ -683,6 +683,9 @@
             })
         });
     </script>
+    <!--===============================================================================================-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+    <script src="{{ asset('frontend/js/map-custom.js') }}"></script>
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 

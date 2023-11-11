@@ -1,5 +1,7 @@
 @extends('frontend.layout')
 
+@section('title', 'Homepage')
+
 @section('content')
     <!-- Slider -->
     <section class="section-slide">
