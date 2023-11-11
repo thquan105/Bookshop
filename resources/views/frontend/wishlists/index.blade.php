@@ -1,5 +1,7 @@
 @extends('frontend.layout')
 
+@section('title', 'Wishlist')
+
 @section('content')
     <!-- breadcrumb -->
     <div class="container">

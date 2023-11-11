@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{{ asset('frontend/images/icons/favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('frontend/images/icons/icon-favicon.png') }}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/vendor/bootstrap/css/bootstrap.min.css') }}">
     <!--===============================================================================================-->
@@ -61,7 +61,7 @@
                             USD
                         </a>
 
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        <a href="{{ route('profile') }}" class="flex-c-m trans-04 p-lr-25">
                             My Account
                         </a>
 
@@ -188,7 +188,7 @@
                             USD
                         </a>
 
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
+                        <a href="{{ route('profile') }}" class="flex-c-m p-lr-10 trans-04">
                             My Account
                         </a>
 

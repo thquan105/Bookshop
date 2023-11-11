@@ -53,3 +53,12 @@ Route::get('blogs/detail', function () {
     return view('frontend.blogs.detail');
 })->name('blogs.detail');
 
+
+Route::get('profile', function () {
+    return view('auth.profile');
+})->name('profile');
+
+Route::get('password.change', function () {
+    return view('auth.password.change');
+})->name('password.change');
+
