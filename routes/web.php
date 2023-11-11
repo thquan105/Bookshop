@@ -14,5 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('frontend.home');
+})->name('home');
+
+Route::get('wishlists', function () {
+    return view('frontend.wishlists.index');
+})->name('wishlists.index');
+
+Route::get('products', function () {
+    return view('frontend.products.index');
+})->name('products.index');
+
+Route::get('carts', function () {
+    return view('frontend.carts.index');
+})->name('carts.index');
+
