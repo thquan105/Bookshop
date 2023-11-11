@@ -14,5 +14,51 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('frontend.home');
+})->name('home');
+
+Route::get('wishlists', function () {
+    return view('frontend.wishlists.index');
+})->name('wishlists.index');
+
+Route::get('products', function () {
+    return view('frontend.products.index');
+})->name('products.index');
+
+Route::get('products/detail', function () {
+    return view('frontend.products.detail');
+})->name('products.detail');
+
+Route::get('carts', function () {
+    return view('frontend.carts.index');
+})->name('carts.index');
+
+Route::get('carts/checkout', function () {
+    return view('frontend.carts.checkout');
+})->name('carts.checkout');
+
+Route::get('about', function () {
+    return view('frontend.other.about');
+})->name('about');
+
+Route::get('contact', function () {
+    return view('frontend.other.contact');
+})->name('contact');
+
+Route::get('blogs', function () {
+    return view('frontend.blogs.index');
+})->name('blogs.index');
+
+Route::get('blogs/detail', function () {
+    return view('frontend.blogs.detail');
+})->name('blogs.detail');
+
+
+Route::get('profile', function () {
+    return view('auth.profile');
+})->name('profile');
+
+Route::get('password.change', function () {
+    return view('auth.password.change');
+})->name('password.change');
+
