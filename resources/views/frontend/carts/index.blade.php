@@ -18,9 +18,9 @@
         </div>
     </div>
 
-
+    <!-- ?num-product1=1&num-product2=1&coupon=&time=USA&state=VN&postcode=123 -->
     <!-- Shoping Cart -->
-    <form class="bg0 p-t-75 p-b-85">
+    <form action="{{ route('carts.checkout') }}" method="" class="bg0 p-t-75 p-b-85">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">

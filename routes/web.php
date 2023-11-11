@@ -33,6 +33,10 @@ Route::get('carts', function () {
     return view('frontend.carts.index');
 })->name('carts.index');
 
+Route::get('carts/checkout', function () {
+    return view('frontend.carts.checkout');
+})->name('carts.checkout');
+
 Route::get('about', function () {
     return view('frontend.other.about');
 })->name('about');
@@ -40,4 +44,12 @@ Route::get('about', function () {
 Route::get('contact', function () {
     return view('frontend.other.contact');
 })->name('contact');
+
+Route::get('blogs', function () {
+    return view('frontend.blogs.index');
+})->name('blogs.index');
+
+Route::get('blogs/detail', function () {
+    return view('frontend.blogs.detail');
+})->name('blogs.detail');
 
