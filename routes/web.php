@@ -62,9 +62,12 @@ Route::get('passwords/change', function () {
 })->name('passwords.change');
 
 
+
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function() {
     // admin
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
 });
