@@ -58,17 +58,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        {{-- {{ route('admin.attributes.index') }} --}}
-                        <a href="" class="nav-link">
+                        <a href="{{ route('admin.products.index') }}" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
-                            <p>Attribute</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        {{-- {{ route('admin.products.index') }} --}}
-                        <a href="" class="nav-link">
-                            <i class="fa fa-plus nav-icon"></i>
-                            <p>Produk</p>
+                            <p>Sách</p>
                         </a>
                     </li>
                 </ul>
