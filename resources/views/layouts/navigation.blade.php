@@ -3,7 +3,8 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-            <a href="{{ route('admin.profile.show') }}" class="d-block">{{ auth()->user()->first_name . auth()->user()->last_name  }}</a>
+            {{-- {{ route('admin.profile.show') }} --}}
+            <a href="" class="d-block">Welcome, {{ auth()->user()->name  }}</a>
         </div>
     </div>
 
@@ -21,7 +22,8 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('admin.users.index') }}" class="nav-link">
+                {{-- {{ route('admin.users.index') }} --}}
+                <a href="" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
                         {{ __('Users') }}
@@ -30,7 +32,8 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('admin.slides.index') }}" class="nav-link">
+                {{-- {{ route('admin.slides.index') }} --}}
+                <a href="" class="nav-link">
                     <i class="nav-icon fa fa-image"></i>
                     <p>
                         {{ __('Slide') }}
@@ -42,25 +45,28 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle nav-icon"></i>
                     <p>
-                        Managemen Produk
+                        Quản lý sách
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        <a href="{{ route('admin.categories.index') }}" class="nav-link">
+                        {{-- {{ route('admin.categories.index') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
-                            <p>Kategori</p>
+                            <p>Danh mục</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.attributes.index') }}" class="nav-link">
+                        {{-- {{ route('admin.attributes.index') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Attribute</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.products.index') }}" class="nav-link">
+                        {{-- {{ route('admin.products.index') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Produk</p>
                         </a>
@@ -71,19 +77,21 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle nav-icon"></i>
                     <p>
-                        Managemen Order
+                        Quản lý đơn hàng
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        <a href="{{ route('admin.orders.index') }}" class="nav-link">
+                        {{-- {{ route('admin.orders.index') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Order</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.shipments.index') }}" class="nav-link">
+                        {{-- {{ route('admin.shipments.index') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Pengiriman</p>
                         </a>
@@ -94,31 +102,35 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-circle nav-icon"></i>
                     <p>
-                        Managemen Report
+                        Báo cáo
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        <a href="{{ route('admin.reports.revenue') }}" class="nav-link">
+                        {{-- {{ route('admin.reports.revenue') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Keuntungan</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.reports.product') }}" class="nav-link">
+                        {{-- {{ route('admin.reports.product') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Produk</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.reports.inventory') }}" class="nav-link">
+                        {{-- {{ route('admin.reports.inventory') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Inventory</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.reports.payment') }}" class="nav-link">
+                        {{-- {{ route('admin.reports.payment') }} --}}
+                        <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Payment</p>
                         </a>
