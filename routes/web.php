@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.home');
-})->name('home');
+Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
 
 Route::get('wishlists', function () {
     return view('frontend.wishlists.index');
@@ -58,7 +57,14 @@ Route::get('profile', function () {
     return view('auth.profile');
 })->name('profile');
 
-Route::get('password.change', function () {
-    return view('auth.password.change');
-})->name('password.change');
+Route::get('passwords/change', function () {
+    return view('auth.passwords.change');
+})->name('passwords.change');
 
+
+Auth::routes();
+
+Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function() {
+    // admin
+    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+});
