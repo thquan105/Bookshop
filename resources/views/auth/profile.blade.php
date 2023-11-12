@@ -100,7 +100,7 @@
                             </div>
                             <!-- Save changes button-->
                             <button class="btn btn-primary" type="submit">Save changes</button>
-                            <a class="btn btn-link" href="{{ route('password.change') }}">
+                            <a class="btn btn-link" href="{{ route('passwords.change') }}">
                                 <button class="btn btn-primary" type="button">Change Password</button>
                             </a>
                         </form>

@@ -61,13 +61,22 @@
                             USD
                         </a>
 
-                        <a href="{{ route('profile') }}" class="flex-c-m trans-04 p-lr-25">
-                            My Account
-                        </a>
+                        @guest
+                            <a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">Login</a>
+                            <a href="{{ url('register') }}" class="flex-c-m trans-04 p-lr-25">Register</a>
+                        @else
+                            <a href="{{ route('profile') }}"
+                                class="flex-c-m trans-04 p-lr-25">{{ Auth::user()->name }}</a>
+                            <a href="{{ route('logout') }}" class="flex-c-m trans-04 p-lr-25"
+                                onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            Login
-                        </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endguest
                     </div>
                 </div>
             </div>
@@ -139,7 +148,8 @@
         <div class="wrap-header-mobile">
             <!-- Logo moblie -->
             <div class="logo-mobile">
-                <a href="{{ route('home') }}"><img src="{{ asset('frontend/images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
+                <a href="{{ route('home') }}"><img src="{{ asset('frontend/images/icons/logo-01.png') }}"
+                        alt="IMG-LOGO"></a>
             </div>
 
             <!-- Icon header -->
