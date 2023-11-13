@@ -12,66 +12,57 @@
               <div class="card-header">
                 <h3 class="card-title">Thêm Sách</h3>
                 {{-- {{ route('admin.products.index')}} --}}
-                <a href="" class="btn btn-success shadow-sm float-right"> <i class="fa fa-arrow-left"></i> Trở về</a>
+                <a href="{{ route('admin.products.index') }}" class="btn btn-success shadow-sm float-right"> <i class="fa fa-arrow-left"></i> Trở về</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 {{-- {{ route('admin.products.store') }} --}}
-                <form method="post" action="">
+                <form action="{{ route('admin.products.store') }}" method="post">
                     @csrf 
-                    <div class="form-group row border-bottom pb-4">
-                        <label for="type" class="col-sm-2 col-form-label">Tipe Kategori</label>
-                        <div class="col-sm-10">
-                          <select class="form-control product-type" name="type" id="type">
-                            {{-- @foreach($types as $value => $type)
-                              <option {{ old('type') == $value ? 'selected' : null }} value="{{ $value }}"> {{ $type }}</option>
-                            @endforeach --}}
-                          </select>
+                    <div class="form-group">
+                        <label for="category_id">Category</label>
+                        <select class="form-control" name="category_id" id="">
+                            @foreach($categories as $id => $categoryName)
+                                <option value="{{ $id }}">{{ $categoryName }}</option>
+                            @endforeach
+                        </select>   
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" value="{{ old('name') }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">price</label>
+                        <input type="number" name="price" value="{{ old('price') }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">quantity</label>
+                        <input type="number" name="quantity" value="{{ old('quantity') }}" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">description</label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="details">details</label>
+                        <textarea class="form-control" name="details" id="details" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="form-group {{ $errors->has('gallery') ? 'has-error' : '' }}">
+                        <label for="gallery">gallery</label>
+                        <div class="needsclick dropzone" id="gallery-dropzone">
+
                         </div>
+                        @if($errors->has('gallery'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('gallery') }}
+                            </em>
+                        @endif
                     </div>
-                    <div class="form-group row border-bottom pb-4">
-                        <label for="sku" class="col-sm-2 col-form-label">SKU</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" name="sku" value="{{ old('sku') }}" id="sku">
-                        </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
-                    <div class="form-group row border-bottom pb-4">
-                        <label for="name" class="col-sm-2 col-form-label">Nama Produk</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" name="name" value="{{ old('name') }}" id="name">
-                        </div>
-                    </div>
-                    <div class="form-group row border-bottom pb-4">
-                        <label for="category_id" class="col-sm-2 col-form-label">Kategori Produk</label>
-                        <div class="col-sm-10">
-                        <!-- sampai sini -->
-                          <select class="form-control select-multiple"  multiple="multiple" name="category_id[]" id="category_id">
-                            {{-- @foreach($categories as $category)
-                              <option {{ old('category_id') == $category->id ? 'selected' : null }} value="{{ $category->id }}"> {{ $category->name }}</option>
-                            @endforeach --}}
-                          </select>
-                        </div>
-                    </div>
-                    <div class="configurable-attributes">
-                      {{-- @if(count($configurable_attributes) > 0)
-                        <p class="text-primary mt-4">Konfigurasi Attribute Produk</p>
-                        <hr/>
-                        @foreach($configurable_attributes as $configurable_attribute)
-                          <div class="form-group row border-bottom pb-4">
-                              <label for="{{ $configurable_attribute->code }}" class="col-sm-2 col-form-label">{{ $configurable_attribute->code }}</label>
-                              <div class="col-sm-10">
-                              <!-- sampai sini -->
-                                <select class="form-control select-multiple"  multiple="multiple" name="{{ $configurable_attribute->code }}[]" id="{{ $configurable_attribute->code }}">
-                                  @foreach($configurable_attribute->attribute_options as $attribute_option)
-                                    <option value="{{ $attribute_option->id }}"> {{ $attribute_option->name }}</option>
-                                  @endforeach
-                                </select>
-                              </div>
-                          </div>
-                        @endforeach
-                      @endif    --}}
-                    </div>
-                    <button type="submit" class="btn btn-success">Save</button>
                 </form>
               </div>
               <!-- /.card-body -->
@@ -116,5 +107,66 @@
 				showHideConfigurableAttributes();
 			});
 		});
+</script>
+@endpush
+@push('style-alt')
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+@endpush
+
+@push('script-alt')   
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script>
+   var uploadedGalleryMap = {}
+Dropzone.options.galleryDropzone = {
+    url: "{{ route('admin.products.storeImage') }}",
+    maxFilesize: 2, // MB
+    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    success: function (file, response) {
+      $('form').append('<input type="hidden" name="gallery[]" value="' + response.name + '">')
+      uploadedGalleryMap[file.name] = response.name
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      var name = ''
+      if (typeof file.file_name !== 'undefined') {
+        name = file.file_name
+      } else {
+        name = uploadedGalleryMap[file.name]
+      }
+      $('form').find('input[name="gallery[]"][value="' + name + '"]').remove()
+    },
+    init: function () {
+@if(isset($product) && $product->gallery)
+      var files =
+        {!! json_encode($product->gallery) !!}
+          for (var i in files) {
+          var file = files[i]
+          this.options.addedfile.call(this, file)
+          this.options.thumbnail.call(this, file, file.original_url)
+          file.previewElement.classList.add('dz-complete')
+          $('form').append('<input type="hidden" name="gallery[]" value="' + file.file_name + '">')
+        }
+@endif
+    },
+     error: function (file, response) {
+         if ($.type(response) === 'string') {
+             var message = response //dropzone sends it's own error messages in string
+         } else {
+             var message = response.errors.file
+         }
+         file.previewElement.classList.add('dz-error')
+         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+         _results = []
+         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+             node = _ref[_i]
+             _results.push(node.textContent = message)
+         }
+         return _results
+     }
+}
 </script>
 @endpush
