@@ -53,21 +53,28 @@ Route::get('blogs/detail', function () {
 })->name('blogs.detail');
 
 
-Route::get('profile', function () {
-    return view('auth.profile');
-})->name('profile');
 
-Route::get('passwords/change', function () {
-    return view('auth.passwords.change');
-})->name('passwords.change');
 
 
 
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function() {
+Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     // admin
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('profile', [\App\Http\Controllers\Auth\ProfileController::class, 'index'])->name('profile.index');
+    Route::put('profile', [\App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('passwords/change', function () {
+        return view('auth.passwords.change');
+    })->name('passwords.change');
+
+    Route::post('get-cities', [\App\Http\Controllers\frontend\OrderController::class, 'cities']);
 });

@@ -10,7 +10,7 @@
                 Home
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
-            <a href="{{ route('profile') }}" class="stext-109 cl8 hov-cl1 trans-04">
+            <a href="{{ route('profile.index') }}" class="stext-109 cl8 hov-cl1 trans-04">
                 Profile
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
@@ -25,6 +25,11 @@
         <div class="bg3 card-header container pt-3">
             <h3 class="mb-0 text-white">Change Password</h3>
         </div>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
         <div class="container pt-3 boder card-body">
             <form class="form" role="form" autocomplete="off">
                 <div class="form-group">

@@ -22,8 +22,7 @@
             </li>
 
             <li class="nav-item">
-                {{-- {{ route('admin.users.index') }} --}}
-                <a href="" class="nav-link">
+                <a href="{{ route('admin.users.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
                         {{ __('Users') }}

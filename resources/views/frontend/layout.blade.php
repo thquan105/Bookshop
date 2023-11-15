@@ -65,7 +65,7 @@
                             <a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">Login</a>
                             <a href="{{ url('register') }}" class="flex-c-m trans-04 p-lr-25">Register</a>
                         @else
-                            <a href="{{ route('profile') }}"
+                            <a href="{{ route('profile.index') }}"
                                 class="flex-c-m trans-04 p-lr-25">{{ Auth::user()->name }}</a>
                             <a href="#" class="flex-c-m trans-04 p-lr-25"
                                 onclick="event.preventDefault();
@@ -198,7 +198,7 @@
                             USD
                         </a>
 
-                        <a href="{{ route('profile') }}" class="flex-c-m p-lr-10 trans-04">
+                        <a href="{{ route('profile.index') }}" class="flex-c-m p-lr-10 trans-04">
                             My Account
                         </a>
 
@@ -532,6 +532,7 @@
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    @stack('script-alt')
 
 </body>
 

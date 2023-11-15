@@ -76,6 +76,6 @@ class RegisterController extends Controller
 	// 	if (property_exists($this, 'registerView')) {
 	// 		return view($this->registerView);
 	// 	}
-	// 	return view('frontend.auth.register');
+	// 	return view('auth.register');
 	// }
 }
