@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{{ asset('frontend/images/icons/icon-favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/vendor/bootstrap/css/bootstrap.min.css') }}">
     <!--===============================================================================================-->
@@ -61,13 +61,22 @@
                             USD
                         </a>
 
-                        <a href="{{ route('profile') }}" class="flex-c-m trans-04 p-lr-25">
-                            My Account
-                        </a>
+                        @guest
+                            <a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">Login</a>
+                            <a href="{{ url('register') }}" class="flex-c-m trans-04 p-lr-25">Register</a>
+                        @else
+                            <a href="{{ route('profile.index') }}"
+                                class="flex-c-m trans-04 p-lr-25">{{ Auth::user()->name }}</a>
+                            <a href="#" class="flex-c-m trans-04 p-lr-25"
+                                onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                        <a href="#" class="flex-c-m trans-04 p-lr-25">
-                            Login
-                        </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endguest
                     </div>
                 </div>
             </div>
@@ -77,7 +86,7 @@
 
                     <!-- Logo desktop -->
                     <a href="{{ route('home') }}" class="logo">
-                        <img src="{{ asset('frontend/images/icons/logo-01.png') }}" alt="IMG-LOGO">
+                        <img src="{{ asset('images/Logo.png') }}" alt="IMG-LOGO">
                     </a>
 
                     <!-- Menu desktop -->
@@ -139,7 +148,8 @@
         <div class="wrap-header-mobile">
             <!-- Logo moblie -->
             <div class="logo-mobile">
-                <a href="{{ route('home') }}"><img src="{{ asset('frontend/images/icons/logo-01.png') }}" alt="IMG-LOGO"></a>
+                <a href="{{ route('home') }}"><img src="{{ asset('images/Logo.png') }}"
+                        alt="IMG-LOGO"></a>
             </div>
 
             <!-- Icon header -->
@@ -188,7 +198,7 @@
                             USD
                         </a>
 
-                        <a href="{{ route('profile') }}" class="flex-c-m p-lr-10 trans-04">
+                        <a href="{{ route('profile.index') }}" class="flex-c-m p-lr-10 trans-04">
                             My Account
                         </a>
 
@@ -522,6 +532,7 @@
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    @stack('script-alt')
 
 </body>
 
