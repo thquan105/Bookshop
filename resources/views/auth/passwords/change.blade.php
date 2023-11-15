@@ -25,29 +25,48 @@
         <div class="bg3 card-header container pt-3">
             <h3 class="mb-0 text-white">Change Password</h3>
         </div>
-        @if (session()->has('message'))
-            <div class="alert alert-success">
-                {{ session()->get('message') }}
+        @if (session()->has('error'))
+            <div class="alert alert-danger container">
+                {{ session()->get('error') }}
+            </div>
+        @endif
+        @if (session()->has('success'))
+            <div class="alert alert-success container">
+                {{ session()->get('success') }}
             </div>
         @endif
         <div class="container pt-3 boder card-body">
-            <form class="form" role="form" autocomplete="off">
+            <form class="form" action="{{ route('passwords.change') }}" method="post">
+                @csrf
+                @method('put')
                 <div class="form-group">
                     <label for="inputPasswordOld">
                         <h5>Current Password</h5>
                     </label>
-                    <input type="password" class="form-control" id="inputPasswordOld" required="">
+                    <input type="password" name="old_password" class="form-control" placeholder="{{ __('Current password') }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="inputPasswordNew"><h5>New Password</h5></label>
-                    <input type="password" class="form-control" id="inputPasswordNew" required="">
+                    <label for="inputPasswordNew">
+                        <h5>New Password</h5>
+                    </label>
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                        placeholder="{{ __('New password') }}" required>
                     <span class="form-text small text-muted">
                         The password must be 8-20 characters, and must <em>not</em> contain spaces.
                     </span>
+                    @error('password')
+                        <span class="error invalid-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
-                    <label for="inputPasswordNewVerify"><h5>Verify</h5></label>
-                    <input type="password" class="form-control" id="inputPasswordNewVerify" required="">
+                    <label for="inputPasswordNewVerify">
+                        <h5>Verify</h5>
+                    </label>
+                    <input type="password" name="password_confirmation"
+                        class="form-control @error('password_confirmation') is-invalid @enderror"
+                        placeholder="{{ __('New password confirmation') }}" autocomplete="new-password" required>
                     <span class="form-text small text-muted">
                         To confirm, type the new password again.
                     </span>

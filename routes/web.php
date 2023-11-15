@@ -68,13 +68,11 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
 });
 
 Route::group(['middleware' => 'auth'], function () {
-
+    //user
     Route::get('profile', [\App\Http\Controllers\Auth\ProfileController::class, 'index'])->name('profile.index');
     Route::put('profile', [\App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('profile.update');
-
-    Route::get('passwords/change', function () {
-        return view('auth.passwords.change');
-    })->name('passwords.change');
+    Route::get('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'show'])->name('passwords.index');
+    Route::put('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'change'])->name('passwords.change');
 
     Route::post('get-cities', [\App\Http\Controllers\frontend\OrderController::class, 'cities']);
 });

@@ -18,11 +18,6 @@ class Controller extends BaseController
 	protected $ghnApiKey = null;
 	protected $ghnBaseUrl = null;
 	protected $ghnOrigin = null;
-	protected $couriers = [
-		'jne' => 'JNE',
-		'pos' => 'POS Indonesia',
-		'tiki' => 'Titipan Kilat'
-	];
 
     protected $provinces = [];
 
@@ -35,7 +30,6 @@ class Controller extends BaseController
 	{
 		$this->ghnApiKey = config('ghn.api_key');
 		$this->ghnBaseUrl = config('ghn.base_url');
-		$this->ghnOrigin = config('ghn.origin');
 	}
     /**
 	 * GHN Request (Shipping Cost Calculation)

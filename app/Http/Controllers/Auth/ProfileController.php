@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -24,6 +26,25 @@ class ProfileController extends Controller
 		//dd($request->validated());
         $user->update($request->validated());
 
-		return redirect()->route('profile.index')->with(['message' => 'success updated']);
+		return redirect()->route('profile.index')->with(['message' => 'Successfully updated !']);
+	}
+
+	public function show()
+	{
+		return view('auth.passwords.change');
+	}
+
+	public function change(UpdatePasswordRequest $request)
+	{
+		$user = auth()->user();
+		//dd($request->old_password);
+
+		if (!Hash::check($request->old_password, $user->password)) {
+			return redirect()->back()->with('error', 'The old password is incorrect.');
+		}
+
+		$user->update(['password' => bcrypt($request->password)]);
+
+        return redirect()->route('passwords.change')->with('success',  'Successfully updated !');
 	}
 }
