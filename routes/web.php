@@ -75,4 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'change'])->name('passwords.change');
 
     Route::post('get-cities', [\App\Http\Controllers\frontend\OrderController::class, 'cities']);
+
+    Route::post('products/images', [\App\Http\Controllers\Admin\ProductController::class,'storeImage'])->name('products.storeImage');
+
 });
