@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
     Route::post('products/images', [\App\Http\Controllers\Admin\ProductController::class,'storeImage'])->name('products.storeImage');
+    Route::resource('categories', CategoryController::class);
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -79,3 +80,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('get-cities', [\App\Http\Controllers\frontend\OrderController::class, 'cities']);
 
 });
+
+
+
