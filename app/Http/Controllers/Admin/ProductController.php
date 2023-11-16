@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\ImageUploadingTrait;
 use App\Models\Category;
-use App\Http\Request\Admin\ProductRequest;
+use App\Http\Requests\Admin\ProductRequest;
 class ProductController extends Controller
 {
     use ImageUploadingTrait;
@@ -19,6 +19,7 @@ class ProductController extends Controller
         $products = Product::all();
 
         return view ('admin.products.index', compact('products'));
+
     }
 
     /**
@@ -84,7 +85,7 @@ class ProductController extends Controller
         }
 
         $media = $product->gallery->pluck('file_name')->toArray();
-
+        
         foreach ($request->input('gallery', []) as $file) {
             if (count($media) === 0 || !in_array($file, $media)) {
                 $product->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('gallery');

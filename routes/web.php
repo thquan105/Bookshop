@@ -65,6 +65,8 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    Route::post('products/images', [\App\Http\Controllers\Admin\ProductController::class,'storeImage'])->name('products.storeImage');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -75,7 +77,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'change'])->name('passwords.change');
 
     Route::post('get-cities', [\App\Http\Controllers\frontend\OrderController::class, 'cities']);
-
-    Route::post('products/images', [\App\Http\Controllers\Admin\ProductController::class,'storeImage'])->name('products.storeImage');
 
 });
