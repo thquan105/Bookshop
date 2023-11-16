@@ -54,7 +54,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(product $id)
+    public function show(product $product)
     {
         return view('admin.products.show', compact('product'));
     }
