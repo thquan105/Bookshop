@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -17,20 +15,6 @@ class Category extends Model
         'photo',
     ];
 
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'name',
-                'onUpdate' => true
-            ]
-        ];
-    }
     
     public function childs() {
         return $this->hasMany(Category::class, 'parent_id');

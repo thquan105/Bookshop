@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table id="data-table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $product)
+                        @forelse ($products as $product)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $product->name }}</td>
@@ -63,7 +63,11 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="8" class="text-center">Trống !</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

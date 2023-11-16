@@ -50,8 +50,7 @@
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        {{-- {{ route('admin.categories.index') }} --}}
-                        <a href="" class="nav-link">
+                        <a href="{{ route('admin.categories.index') }}" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Danh mục</p>
                         </a>

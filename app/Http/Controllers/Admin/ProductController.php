@@ -29,7 +29,6 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('name', 'id');
         return view('admin.products.create', compact('categories'));
-        //return view('admin.products.create');
 
     }
 
@@ -47,7 +46,7 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')->with([
             'message' => 'Success Created !',
-            'type' => 'success'
+            'alert-type' => 'success'
         ]);
     }
 
@@ -94,7 +93,7 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')->with([
             'message' => 'Success Updated !',
-            'type' => 'info'
+            'alert-type' => 'success'
         ]);
     }
 
@@ -110,7 +109,7 @@ class ProductController extends Controller
 
         return redirect()->back()->with([
             'message' => 'Success Deleted !',
-            'type' => 'danger'
+            'alert-type' => 'danger'
         ]);
     }
 }
