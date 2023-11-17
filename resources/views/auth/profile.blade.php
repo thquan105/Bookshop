@@ -23,7 +23,7 @@
             <h4 class="mb-0 text-dark">Account Details</h4>
         </div>
         @if (session()->has('message'))
-            <div class="alert alert-success">
+            <div class="alert alert-success container">
                 {{ session()->get('message') }}
             </div>
         @endif
@@ -79,7 +79,7 @@
                         <label class="small mb-1">Province <span class="required">*</span></label>
                         <select class="form-control" name="province_id" id="province-id"
                             value="{{ auth()->user()->province_id }}">
-                            <option value="">- Please Select -</option>
+                            <option value="">Select Province</option>
                             @foreach ($provinces as $province => $pro)
                                 <option {{ auth()->user()->province_id == $province ? 'selected' : null }}
                                     value="{{ $province }}">{{ $pro }}</option>
@@ -157,24 +157,30 @@
     <script>
         $('#province-id').on('change', function() {
             var province_id = this.value;
-            $("#city-id").html('');
-            $.ajax({
-                url: "{{ url('get-cities') }}",
-                type: "POST",
-                data: {
-                    province_id: province_id,
-                    _token: '{{ csrf_token() }}'
-                },
-                dataType: 'json',
-                success: function(result) {
-                    $('#city-id').html('<option value="">Select City</option>');
-                    $.each(result.cities, function(key, value) {
-                        //console.log(value);
-                        $("#city-id").append('<option value="' + key + '">' + value +
-                            '</option>');
-                    });
-                }
-            });
+            $('#city-id').html('<option value="">Select City</option>');
+            if (province_id == null || province_id == '') {
+                return;
+            } 
+            else 
+            {                
+                $.ajax({
+                    url: "{{ url('get-cities') }}",
+                    type: "POST",
+                    data: {
+                        province_id: province_id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#city-id').html('<option value="">Select City</option>');
+                        $.each(result.cities, function(key, value) {
+                            //console.log(value);
+                            $("#city-id").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+                    }
+                });
+            }
         });
     </script>
 @endpush
