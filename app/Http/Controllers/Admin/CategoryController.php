@@ -39,7 +39,7 @@ class CategoryController extends Controller
         Category::create($request->validated());
 
         return redirect()->route('admin.categories.index')->with([
-            'message' => 'berhasil dibuat !',
+            'message' => 'Thêm thành công !',
             'alert-type' => 'success'
         ]);
     }
@@ -70,7 +70,7 @@ class CategoryController extends Controller
         $category->update($request->validated());
 
         return redirect()->route('admin.categories.index')->with([
-            'message' => 'Thêm thành công !',
+            'message' => 'Sửa thành công !',
             'alert-type' => 'success'
         ]);
     }
