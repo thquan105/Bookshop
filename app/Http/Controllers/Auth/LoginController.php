@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -38,11 +40,31 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     public function showLoginForm()
-	{
-		if (view()->exists('auth.authenticate')) {
-			return view('auth.authenticate');
-		}
+    {
+        if (view()->exists('auth.authenticate')) {
+            return view('auth.authenticate');
+        }
 
-		return view('auth.login');
-	}
+        return view('auth.login');
+    }
+    public function login(Request $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request, [
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string']
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (auth()->user()->is_admin) {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('home');
+            }
+        } else {
+            return redirect()->route('login')
+                ->with('error', 'Email And Password Are Wrong.');
+        }
+    }
 }
