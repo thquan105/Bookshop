@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
     Route::post('products/images', [\App\Http\Controllers\Admin\ProductController::class,'storeImage'])->name('products.storeImage');
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
+    Route::put('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::group(['middleware' => 'auth'], function () {
