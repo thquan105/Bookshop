@@ -148,8 +148,7 @@
         <div class="wrap-header-mobile">
             <!-- Logo moblie -->
             <div class="logo-mobile">
-                <a href="{{ route('home') }}"><img src="{{ asset('images/Logo.png') }}"
-                        alt="IMG-LOGO"></a>
+                <a href="{{ route('home') }}"><img src="{{ asset('images/Logo.png') }}" alt="IMG-LOGO"></a>
             </div>
 
             <!-- Icon header -->
@@ -263,6 +262,15 @@
     <!-- Cart sidebar -->
     @include('frontend.carts.cart')
 
+    @if (session()->has('alert'))
+        <div class="alert alert-success">
+            <div class="container">
+                Login successfully - {{ session()->get('alert') }} - <a href="{{ route('passwords.index') }}"
+                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2" aria-label="close">Change Password Now >>></a>
+            </div>
+        </div>
+        </section>
+    @endif
 
     <!-- Content page -->
     @yield('content')
