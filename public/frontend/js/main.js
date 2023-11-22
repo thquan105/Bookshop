@@ -1,3 +1,14 @@
+function getQuickView(product_slug) {
+    $.ajax({
+        type: "GET",
+        url: "/product/quick-view/" + product_slug,
+        success: function (response) {
+            $('#exampleModal').html(response);
+            $('.js-modal1').addClass('show-modal1');
+        }
+    });
+}
+
 
 (function ($) {
     "use strict";
@@ -268,9 +279,11 @@
     
     /*==================================================================
     [ Show modal1 ]*/
-    $('.js-show-modal1').on('click',function(e){
+    $('.js-show-modal1').on('click', function (e) {
         e.preventDefault();
-        $('.js-modal1').addClass('show-modal1');
+
+        var product_slug = $(this).attr('product-slug');
+        getQuickView(product_slug);
     });
 
     $('.js-hide-modal1').on('click',function(){

@@ -12,5 +12,9 @@ class ProductController extends Controller
     {
         return view('frontend.products.detail', compact('product'));
     }
+    public function quickView(Product $product)
+	{
+        return view('frontend.products.quickview', compact('product'));
+	}
 
 }
