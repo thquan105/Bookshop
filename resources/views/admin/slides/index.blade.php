@@ -19,7 +19,7 @@
                     <table id="data-table" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Thứ tự</th>
                         <th>Tiêu đề</th>
                         <th>Hình ảnh</th>
                         <th>Đổi thứ tự</th>
@@ -28,9 +28,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @forelse ($slides as $slide)
+                        @forelse ($slides->sortBy('position') as $slide)
                             <tr>    
-                                <td>{{ $slide->id }}</td>
+                                <td>{{ $slide->position }}</td>
                                 <td>{{ $slide->title }}</td>
                                 <td><img width="200" src="{{ Storage::url($slide->path) }}" /></td>
                                 <td>

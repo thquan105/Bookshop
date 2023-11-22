@@ -68,6 +68,9 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
     Route::post('products/images', [\App\Http\Controllers\Admin\ProductController::class,'storeImage'])->name('products.storeImage');
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('slides', \App\Http\Controllers\Admin\SlideController::class);
+    Route::get('slides/{slideId}/up', [\App\Http\Controllers\Admin\SlideController::class, 'moveUp']);
+    Route::get('slides/{slideId}/down', [\App\Http\Controllers\Admin\SlideController::class, 'moveDown']);
+
 });
 
 Route::group(['middleware' => 'auth'], function () {

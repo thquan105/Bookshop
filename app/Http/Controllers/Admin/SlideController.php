@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\SlideRequest;
 
-
 class SlideController extends Controller
 {
     public function index()
