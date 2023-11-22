@@ -4,7 +4,12 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
             {{-- {{ route('admin.profile.show') }} --}}
-            <a href="" class="d-block">Welcome, {{ auth()->user()->name  }}</a>
+            <a href="" class="d-block">Welcome, 
+            @if (empty(auth()->user()->first_name) || empty(auth()->user()->last_name))
+                {{ auth()->user()->name }}
+            @else
+                {{ auth()->user()->first_name .' '. auth()->user()->last_name }}
+            @endif</a>
         </div>
     </div>
 

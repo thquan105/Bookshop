@@ -26,6 +26,7 @@ return new class extends Migration
 			$table->integer('province_id')->nullable();
 			$table->integer('city_id')->nullable();
             $table->integer('postcode')->nullable();
+            $table->string('google_id')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });

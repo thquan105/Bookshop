@@ -37,10 +37,14 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                        {{ auth()->user()->name }}
+                        @if (empty(auth()->user()->first_name) || empty(auth()->user()->last_name))
+                            {{ auth()->user()->name }}
+                        @else
+                            {{ auth()->user()->first_name .' '. auth()->user()->last_name }}
+                        @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
-                        <a href="{{ route('admin.dashboard') }}" class="dropdown-item">
+                        <a href="{{ route('admin.profile.show') }}" class="dropdown-item">
                             <i class="mr-2 fas fa-file"></i>
                             {{ __('My profile') }}
                         </a>
@@ -63,8 +67,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="{{ asset('images/Logo-admin.png') }}" alt="Admin Furin"
-                    class="brand-image">
+                <img src="{{ asset('images/Logo-admin.png') }}" alt="Admin Furin" class="brand-image">
                 <span class="brand-text font-weight-light">Admin</span>
             </a>
 
