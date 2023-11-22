@@ -36,6 +36,7 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
+
     public static function childIds($parentId = 0)
 	{
 		$categories = Category::select('id','name','parent_id')->where('parent_id', $parentId)->get()->toArray();
@@ -57,7 +58,7 @@ class Category extends Model
 
 
     public function children(){
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function scopeParentCategories($query)

@@ -15,18 +15,21 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/Home/{slug?}', [App\Http\Controllers\Frontend\HomeController::class, 'showProduct'])->name('home.product');
+Route::get('/shop/{slug?}', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('products.index');
+Route::get('/product/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('products.show');
 
 Route::get('wishlists', function () {
     return view('frontend.wishlists.index');
 })->name('wishlists.index');
 
-Route::get('products', function () {
-    return view('frontend.products.index');
-})->name('products.index');
+// Route::get('products', function () {
+//     return view('frontend.products.index');
+// })->name('products.index');
 
-Route::get('products/detail', function () {
-    return view('frontend.products.detail');
-})->name('products.detail');
+// Route::get('products/detail', function () {
+//     return view('frontend.products.detail');
+// })->name('products.detail');
 
 Route::get('carts', function () {
     return view('frontend.carts.index');
