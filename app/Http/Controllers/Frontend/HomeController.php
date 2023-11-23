@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Slide;
 
 
 
@@ -30,7 +31,9 @@ class HomeController extends Controller
     {
         $products = Product::with('category')->get(['id','name', 'price','slug']);
         $category = Category::all();
-        return view('frontend.home', compact('products', 'category'));
+        $slides = Slide::active()->orderBy('position', 'ASC')->get();;
+        
+        return view('frontend.home', compact('products', 'category', 'slides'));
     }
 
     public function showProduct($slug  = "All product")

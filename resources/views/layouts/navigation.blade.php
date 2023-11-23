@@ -37,7 +37,7 @@
 
             <li class="nav-item">
                 {{-- {{ route('admin.slides.index') }} --}}
-                <a href="" class="nav-link">
+                <a href="{{ route('admin.slides.index') }}" class="nav-link">
                     <i class="nav-icon fa fa-image"></i>
                     <p>
                         {{ __('Slide') }}
