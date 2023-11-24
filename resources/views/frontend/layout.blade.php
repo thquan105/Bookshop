@@ -148,8 +148,7 @@
         <div class="wrap-header-mobile">
             <!-- Logo moblie -->
             <div class="logo-mobile">
-                <a href="{{ route('home') }}"><img src="{{ asset('images/Logo.png') }}"
-                        alt="IMG-LOGO"></a>
+                <a href="{{ route('home') }}"><img src="{{ asset('images/Logo.png') }}" alt="IMG-LOGO"></a>
             </div>
 
             <!-- Icon header -->
@@ -263,6 +262,15 @@
     <!-- Cart sidebar -->
     @include('frontend.carts.cart')
 
+    @if (session()->has('alert'))
+        <div class="alert alert-success">
+            <div class="container">
+                Login successfully - {{ session()->get('alert') }} - <a href="{{ route('passwords.index') }}"
+                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2" aria-label="close">Change Password Now >>></a>
+            </div>
+        </div>
+        </section>
+    @endif
 
     <!-- Content page -->
     @yield('content')
@@ -430,7 +438,23 @@
     </div>
 
     <!-- Quick view -->
-    @include('frontend.products.quickview')
+    {{-- @include('frontend.products.quickview') --}}
+    <!-- Modal1 -->
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="{{ asset('frontend/images/icons/icon-close.png') }}" alt="CLOSE">
+                </button>
+
+                <div class="row" id="exampleModal">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- all js -->
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/vendor/jquery/jquery-3.4.1.min.js') }}"></script>

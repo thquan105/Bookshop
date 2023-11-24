@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +16,22 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/Home/{slug?}', [App\Http\Controllers\Frontend\HomeController::class, 'showProduct'])->name('home.product');
+Route::get('/shop/{slug?}', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('products.index');
+Route::get('/product/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('products.show');
+Route::get('/product/quick-view/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'quickView']);
 
 Route::get('wishlists', function () {
     return view('frontend.wishlists.index');
 })->name('wishlists.index');
 
-Route::get('products', function () {
-    return view('frontend.products.index');
-})->name('products.index');
+// Route::get('products', function () {
+//     return view('frontend.products.index');
+// })->name('products.index');
 
-Route::get('products/detail', function () {
-    return view('frontend.products.detail');
-})->name('products.detail');
+// Route::get('products/detail', function () {
+//     return view('frontend.products.detail');
+// })->name('products.detail');
 
 Route::get('carts', function () {
     return view('frontend.carts.index');
@@ -60,6 +65,10 @@ Route::get('blogs/detail', function () {
 
 Auth::routes();
 
+//login by facebook account
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login-by-google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     // admin
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
@@ -71,6 +80,8 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
     Route::get('slides/{slideId}/up', [\App\Http\Controllers\Admin\SlideController::class, 'moveUp']);
     Route::get('slides/{slideId}/down', [\App\Http\Controllers\Admin\SlideController::class, 'moveDown']);
 
+    Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
+    Route::put('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::group(['middleware' => 'auth'], function () {
