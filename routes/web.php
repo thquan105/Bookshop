@@ -101,10 +101,7 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
-
-    Route::resource('slides', \App\Http\Controllers\Admin\SlideController::class);
-    Route::get('slides/{slideId}/up', [\App\Http\Controllers\Admin\SlideController::class, 'moveUp']);
-    Route::get('slides/{slideId}/down', [\App\Http\Controllers\Admin\SlideController::class, 'moveDown']);
+    
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

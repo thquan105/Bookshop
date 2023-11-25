@@ -31,9 +31,8 @@ class HomeController extends Controller
     {
         $products = Product::with('category')->get(['id','name', 'price','slug']);
         $category = Category::all();
-        $slides = Slide::active()->orderBy('position', 'ASC')->get();;
         
-        return view('frontend.home', compact('products', 'category', 'slides'));
+        return view('frontend.home', compact('products', 'category'));
     }
 
     public function showProduct($slug  = "All product")
