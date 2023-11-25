@@ -5,6 +5,8 @@
     <title>@yield('title') | Book Shop</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <!--===============================================================================================-->
@@ -129,14 +131,12 @@
                             <i class="zmdi zmdi-search"></i>
                         </div>
 
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                            data-notify="2">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
 
                         <a href="{{ route('wishlists.index') }}"
-                            class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                            data-notify="0">
+                            class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
                     </div>
@@ -269,7 +269,6 @@
                     class="stext-104 cl4 hov-cl1 trans-04 js-name-b2" aria-label="close">Change Password Now >>></a>
             </div>
         </div>
-        </section>
     @endif
 
     <!-- Content page -->
@@ -505,26 +504,76 @@
     <script>
         $('.js-addwish-b2').on('click', function(e) {
             e.preventDefault();
+
         });
 
         $('.js-addwish-b2').each(function() {
-            var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+            var product_slug = $(this).attr("product-slug");
             $(this).on('click', function() {
-                swal(nameProduct, "is added to wishlist !", "success");
+                
 
+                $.ajax({
+                    type: "POST",
+                    url: "/wishlists",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                        product_slug: product_slug,
+                    },
+                    success: function(response) {
+                        if (response.status == 401) {
+                            window.location = '/login';
+                        } else {
+                            swal(response, "is added to wishlist !", "success");
+                            $(this).off('click');
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        if (xhr.status == 401) {
+                            console.log(xhr);
+                            window.location = '/login';
+                        }
+
+                        if (xhr.status == 422) {
+                            alert(xhr.responseText);
+                        }
+                    },
+                });
                 $(this).addClass('js-addedwish-b2');
-                $(this).off('click');
             });
         });
 
         $('.js-addwish-detail').each(function() {
-            var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
+            var product_slug = $(this).attr("product-slug");
             $(this).on('click', function() {
-                swal(nameProduct, "is added to wishlist !", "success");
+                
 
+                $.ajax({
+                    type: "POST",
+                    url: "/wishlists",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                        product_slug: product_slug,
+                    },
+                    success: function(response) {
+                        if (response.status == 401) {
+                            window.location = '/login';
+                        } else {
+                            swal(response, "is added to wishlist !", "success");
+                            $(this).off('click');
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        if (xhr.status == 401) {
+                            console.log(xhr);
+                            window.location = '/login';
+                        }
+
+                        if (xhr.status == 422) {
+                            alert(xhr.responseText);
+                        }
+                    },
+                });
                 $(this).addClass('js-addedwish-detail');
-                $(this).off('click');
             });
         });
 

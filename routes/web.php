@@ -23,9 +23,9 @@ Route::get('/shop/{slug?}', [App\Http\Controllers\Frontend\ShopController::class
 Route::get('/product/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('products.show');
 Route::get('/product/quick-view/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'quickView']);
 
-Route::get('wishlists', function () {
-    return view('frontend.wishlists.index');
-})->name('wishlists.index');
+// Route::get('wishlists', function () {
+//     return view('frontend.wishlists.index');
+// })->name('wishlists.index');
 
 // Route::get('products', function () {
 //     return view('frontend.products.index');
@@ -88,6 +88,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         return back()->with('resent', 'done');
     })->middleware('throttle:6,1')->name('verification.resend');
+
+    Route::resource('wishlists', \App\Http\Controllers\Frontend\WishListController::class)->only(['index','store','destroy']);
 });
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -111,5 +113,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::put('profile', [\App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('profile.update');
     Route::get('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'show'])->name('passwords.index');
     Route::put('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'change'])->name('passwords.change');
-    Route::post('get-cities', [\App\Http\Controllers\frontend\OrderController::class, 'cities']);
+    Route::post('get-cities', [\App\Http\Controllers\Frontend\OrderController::class, 'cities']);
+
+    
 });
