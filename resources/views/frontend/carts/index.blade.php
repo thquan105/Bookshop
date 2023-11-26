@@ -48,16 +48,18 @@
                                         <td class="column-4">
                                             <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
-                                                onclick="updateQuantity('change', {{$item->id}})">
+                                                onclick="updateQuantity(this)" data-rowid="{{$item->rowId}}" 
+                                                >
                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                 </div>
 
-                                                <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                onchange="updateQuantity('change', {{$item->id}})"
-                                                    name="num-product1" value="{{$item->qty}}" data-productId="{{$item->rowId}}">
+                                                <input class="mtext-104 cl3 txt-center num-product updateQty" type="number" id="productQty_{{$item->rowId}}"
+                                                onchange="updateQuantity(this)" data-rowid="{{$item->rowId}}" 
+                                                    name="num-product1" value="{{$item->qty}}">
 
-                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
-                                                onclick="updateQuantity('change', {{$item->id}})">
+                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" 
+                                                onclick="updateQuantity(this)" data-rowid="{{$item->rowId}}" 
+                                                >
                                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                                 </div>
                                             </div>
@@ -66,7 +68,7 @@
                                         <td class="product-remove">
                                         <div class="remove">
                                             <a href="{{ url('carts/remove/'. $item->rowId)}}" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i> Remove
+                                                <i class="fa fa-trash"></i>
                                             </a>
                                         </div>												
                                         </td>
@@ -198,48 +200,13 @@
         <input type="hidden" id="quantity" name="quantity">
     </form>
 @endsection
-@push('script-alt')
-<script>	
-    // function updateQuantity(qty)
-    // {
-    //     $('#rowId').val($(qty).data('rowid'));
-    //     $('#quantity').val($(qty).val());
-    //     $('#updateCartQty').submit();
-    // }
-
-    function updateQuantity(action, itemId) {
-        var inputElement = document.getElementById('quantity_' + itemId);
-        var currentValue = parseInt(inputElement.value);
-
-        // if (action === 'increase') {
-        //     inputElement.value = currentValue + 1;
-        // } else if (action === 'decrease') {
-        //     if (currentValue > 1) {
-        //         inputElement.value = currentValue - 1;
-        //     }
-        // }
-
-        // Call a function to update the cart on the server (you need to implement this in your Laravel application)
-        updateCartOnServer(itemId, inputElement.value);
-    }
-
-    function updateCartOnServer(itemId, newQuantity) {
-        // Use AJAX or other methods to send the updated quantity to the server
-        // For example, you can use Axios or jQuery.ajax to send a request to your Laravel route/controller
-
-        // Example using Axios
-        axios.post('/carts/update', {
-            itemId: itemId,
-            newQuantity: newQuantity
-        })
-        .then(function (response) {
-            // Handle success, e.g., display a success message
-            console.log(response.data);
-        })
-        .catch(function (error) {
-            // Handle error, e.g., display an error message
-            console.error(error);
-        });
+<script>
+    function updateQuantity(element) {        
+        rowId = element.getAttribute('data-rowid');
+        var inputElement = document.getElementById('productQty_' + rowId);
+        var quantity = parseInt(inputElement.value) + 1;
+        $('#rowId').val(rowId);
+        $('#quantity').val(quantity);
+        $('#updateCartQty').submit();
     }
 </script>
-@endpush

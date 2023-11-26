@@ -30,19 +30,8 @@ class CartController extends Controller
 
 	public function update(Request $request)
 	{
-		// Cart::instance('cart')->update($request->rowId,$request->quantity);
-		// $params = $request->except('_token');
+		Cart::instance('cart')->update($request->rowId,$request->quantity);
 		
-		// Cart::instance('cart')->update($request->productId, $request->qty);
-
-		$itemId = $request->input('itemId');
-        $newQuantity = $request->input('newQuantity');
-
-        // Your logic to update the cart in the database based on $itemId and $newQuantity		
-		Cart::instance('cart')->update($itemId, $newQuantity);
-
-        // Return a response (you can customize this based on your needs)
-        // return response()->json(['message' => 'Cart updated successfully']);
 		return redirect()->route('carts.index');
 	}
 	

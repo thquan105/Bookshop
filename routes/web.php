@@ -35,7 +35,7 @@ Route::get('wishlists', function () {
 
 Route::get('carts', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('carts.index');
 Route::post('/carts/store', [\App\Http\Controllers\Frontend\CartController::class, 'addToCart'])->name('carts.store');
-Route::post('/carts/update', [\App\Http\Controllers\Frontend\CartController::class, 'update'])->name('carts.update');
+Route::put('/carts/update', [\App\Http\Controllers\Frontend\CartController::class, 'update'])->name('carts.update');
 Route::get('/carts/remove/{cartId}', [\App\Http\Controllers\Frontend\CartController::class, 'destroy']);
 
 
