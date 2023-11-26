@@ -68,7 +68,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="column-5">{{ $item->subtotal() }}đ</td>
+                                            <td class="column-5">{{ $item->subtotal(0, '', '') }}đ</td>
                                             <td class="column-3 product-remove">
                                                 <div class="remove">
                                                     <a href="{{ url('carts/remove/' . $item->rowId) }}"
@@ -113,7 +113,7 @@
 
                                 <div class="size-209 p-t-1">
                                     <span class="mtext-110 cl2">
-                                        {{ Cart::instance('cart')->subtotal() }} vnđ
+                                        {{ Cart::instance('cart')->subtotal(0, '', '') }} vnđ
                                     </span>
                                 </div>
                             </div>

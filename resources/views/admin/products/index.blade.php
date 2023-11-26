@@ -33,7 +33,7 @@
                                     <span class="badge badge-success">{{ $product->category->name }}</span>
                                 </td>
 
-                                <td>${{ number_format($product->price, 2) }}</td>
+                                <td>{{ $product->price }}vnđ</td>
                                 <td>{{ $product->quantity }}</td>
                                 <td>
                                     @if (count($product->gallery) > 0)
