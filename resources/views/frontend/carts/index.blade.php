@@ -47,7 +47,7 @@
                                                 @endif
                                             </td>
                                             <td class="column-2" style="text-align: center;">{{ $item->model->name }}</td>
-                                            <td class="column-3">${{ $item->price }}</td>
+                                            <td class="column-3">{{ $item->price }}đ</td>
                                             <td class="column-4">
                                                 <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                                     <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
@@ -68,7 +68,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="column-5">${{ $item->subtotal() }}</td>
+                                            <td class="column-5">{{ $item->subtotal() }}đ</td>
                                             <td class="column-3 product-remove">
                                                 <div class="remove">
                                                     <a href="{{ url('carts/remove/' . $item->rowId) }}"
@@ -113,7 +113,7 @@
 
                                 <div class="size-209 p-t-1">
                                     <span class="mtext-110 cl2">
-                                        ${{ Cart::instance('cart')->subtotal() }}
+                                        {{ Cart::instance('cart')->subtotal() }}đ
                                     </span>
                                 </div>
                             </div>
