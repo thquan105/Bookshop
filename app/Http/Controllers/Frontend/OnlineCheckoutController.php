@@ -5,9 +5,18 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bill;
+use Cart;
 
 class OnlineCheckoutController extends Controller
 {
+    public function index()
+    {
+		// Cart::destroy();
+		$items = Cart::instance('cart')->content();
+
+		return view('frontend.carts.checkout', ['items'=>$items]);
+    }
+
     public function execPostRequest($url, $data)
     {
         $ch = curl_init($url);
@@ -41,8 +50,7 @@ class OnlineCheckoutController extends Controller
         $Bill->City = $request->input('City');
         $Bill->State = $request->input('State');
         $Bill->ZipCode = $request->input('ZipCode');
-        $Bill->cart_id = "11";
-        $Bill->total_amount = "1000";
+        $Bill->total_amount = Cart::instance('cart')->subtotal() + 10000;
         $Bill->save();
 
 
@@ -56,7 +64,7 @@ class OnlineCheckoutController extends Controller
             $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
 
             $orderInfo = "Thanh toán qua MoMo";
-            $amount = "10000";
+            $amount = Cart::instance('cart')->subtotal() * 10000;
             $orderId = time() ."";
             $redirectUrl = env('APP_URL');
             $ipnUrl =  env('APP_URL');
@@ -94,6 +102,8 @@ class OnlineCheckoutController extends Controller
                 'signature' => $signature);
             $result = $this->execPostRequest($endpoint, json_encode($data));
             $jsonResult = json_decode($result, true);  // decode json
+
+            Cart::detroy();
 
             //Just a example, please check more in there
             return redirect()->away($jsonResult['payUrl']);

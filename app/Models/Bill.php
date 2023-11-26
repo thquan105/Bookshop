@@ -21,7 +21,6 @@ class Bill extends Model
         'City', 
         'State',
         'ZipCode',
-        'cart_id', // Nếu có
         'total_amount',
     ];
 

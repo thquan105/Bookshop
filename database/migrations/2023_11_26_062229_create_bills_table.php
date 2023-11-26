@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('City');
             $table->string('State');
             $table->string('ZipCode');
-            $table->unsignedBigInteger('cart_id');
             $table->decimal('total_amount', 8, 2);
             $table->timestamps();
         });

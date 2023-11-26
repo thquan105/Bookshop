@@ -32,16 +32,11 @@ Route::post('/Checkout/OnlineCheckout', [App\Http\Controllers\Frontend\OnlineChe
 
 
 
-
 Route::get('carts', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('carts.index');
 Route::post('/carts/store', [\App\Http\Controllers\Frontend\CartController::class, 'addToCart'])->name('carts.store');
 Route::put('/carts/update', [\App\Http\Controllers\Frontend\CartController::class, 'update'])->name('carts.update');
 Route::get('/carts/remove/{cartId}', [\App\Http\Controllers\Frontend\CartController::class, 'destroy']);
 
-
-Route::get('carts/checkout', function () {
-    return view('frontend.carts.checkout');
-})->name('carts.checkout');
 
 Route::get('about', function () {
     return view('frontend.other.about');
@@ -91,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('wishlists', \App\Http\Controllers\Frontend\WishListController::class)->only(['index','store','destroy']);
     Route::get('load-wishlist-count', [\App\Http\Controllers\Frontend\WishListController::class, 'wishlistCount']);
+    Route::get('carts/checkout', [\App\Http\Controllers\Frontend\OnlineCheckoutController::class, 'index'])->name('carts.checkout');
 });
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -116,6 +112,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'show'])->name('passwords.index');
     Route::put('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'change'])->name('passwords.change');
     Route::post('get-cities', [\App\Http\Controllers\Frontend\OrderController::class, 'cities']);
-
+    
     
 });
