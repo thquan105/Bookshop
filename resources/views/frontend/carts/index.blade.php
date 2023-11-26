@@ -48,7 +48,7 @@
                                         <td class="column-4">
                                             <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
-                                                onclick="updateQuantity(this)" data-rowid="{{$item->rowId}}" 
+                                                onclick="updateQuantity(this)" data-rowid="{{$item->rowId}}" data-act="down"
                                                 >
                                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                                 </div>
@@ -58,13 +58,13 @@
                                                     name="num-product1" value="{{$item->qty}}">
 
                                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" 
-                                                onclick="updateQuantity(this)" data-rowid="{{$item->rowId}}" 
+                                                onclick="updateQuantity(this)" data-rowid="{{$item->rowId}}" data-act="up"
                                                 >
                                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="column-5">{{$item->subtotal()}}</td>
+                                        <td class="column-5">${{$item->subtotal()}}</td>
                                         <td class="product-remove">
                                         <div class="remove">
                                             <a href="{{ url('carts/remove/'. $item->rowId)}}" class="btn btn-danger btn-sm">
@@ -88,10 +88,6 @@
                                 </div>
                             </div>
 
-                            <div
-                                class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                                Update Cart
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -173,7 +169,7 @@
 
                             <div class="size-209 p-t-1">
                                 <span class="mtext-110 cl2">
-                                    ${{Cart::instance('cart')->total()}}
+                                    ${{Cart::instance('cart')->subtotal()}}
                                 </span>
                             </div>
                         </div>
@@ -204,7 +200,15 @@
     function updateQuantity(element) {        
         rowId = element.getAttribute('data-rowid');
         var inputElement = document.getElementById('productQty_' + rowId);
-        var quantity = parseInt(inputElement.value) + 1;
+        if(element.getAttribute('data-act')==="down"){
+            var quantity = parseInt(inputElement.value)-1;
+        }
+        else if(element.getAttribute('data-act')==="up"){
+            var quantity = parseInt(inputElement.value)+1;
+        }
+        else{
+            var quantity = parseInt(inputElement.value);
+        }
         $('#rowId').val(rowId);
         $('#quantity').val(quantity);
         $('#updateCartQty').submit();
