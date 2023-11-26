@@ -9,30 +9,16 @@ use App\Models\Category;
 use App\Models\Slide;
 
 
+use App\Models\Slide;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
+        $slides = Slide::active()->orderBy('position', 'ASC')->get();
         $products = Product::with('category')->get(['id','name', 'price','slug']);
         $category = Category::all();
-        
-        return view('frontend.home', compact('products', 'category'));
+        return view('frontend.home', compact('products', 'category','slides'));
     }
 
     public function showProduct($slug  = "All product")

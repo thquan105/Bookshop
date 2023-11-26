@@ -35,9 +35,11 @@ Route::get('/product/quick-view/{product:slug}', [\App\Http\Controllers\Frontend
 //     return view('frontend.products.detail');
 // })->name('products.detail');
 
-Route::get('carts', function () {
-    return view('frontend.carts.index');
-})->name('carts.index');
+Route::get('carts', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('carts.index');
+Route::post('/carts/store', [\App\Http\Controllers\Frontend\CartController::class, 'addToCart'])->name('carts.store');
+Route::put('/carts/update', [\App\Http\Controllers\Frontend\CartController::class, 'update'])->name('carts.update');
+Route::get('/carts/remove/{cartId}', [\App\Http\Controllers\Frontend\CartController::class, 'destroy']);
+
 
 Route::get('carts/checkout', function () {
     return view('frontend.carts.checkout');
@@ -100,6 +102,10 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
     Route::post('products/images', [\App\Http\Controllers\Admin\ProductController::class, 'storeImage'])->name('products.storeImage');
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('slides', \App\Http\Controllers\Admin\SlideController::class);
+    Route::get('slides/{slideId}/up', [\App\Http\Controllers\Admin\SlideController::class, 'moveUp']);
+    Route::get('slides/{slideId}/down', [\App\Http\Controllers\Admin\SlideController::class, 'moveDown']);
+
     Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
     

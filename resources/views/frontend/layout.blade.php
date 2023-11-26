@@ -108,7 +108,7 @@
                             </li>
 
                             <li class="label1 {{ Route::is('carts.index') ? 'active-menu' : '' }}" data-label1="hot">
-                                <a href="{{ route('carts.index') }}">Cart</a>
+                                <a href="">New</a>
                             </li>
 
                             <li class="{{ Route::is('blogs.index') ? 'active-menu' : '' }}">
@@ -131,9 +131,10 @@
                             <i class="zmdi zmdi-search"></i>
                         </div>
 
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="3">
+                        <a href="{{ route('carts.index') }}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+                            data-notify="{{Cart::instance('cart')->content()->count()}}">
                             <i class="zmdi zmdi-shopping-cart"></i>
-                        </div>
+                        </a>
 
                         <a href="{{ route('wishlists.index') }}"
                             class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti wishlist-count" data-notify="0">
@@ -158,7 +159,7 @@
                 </div>
 
                 <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                    data-notify="2">
+                    data-notify="{{Cart::instance('cart')->content()->count()}}">
                     <i class="zmdi zmdi-shopping-cart"></i>
                 </div>
 
@@ -226,7 +227,7 @@
                 </li>
 
                 <li class="{{ Route::is('carts.index') ? 'active-menu' : '' }}">
-                    <a href="{{ route('carts.index') }}" class="label1 rs1" data-label1="hot">Cart</a>
+                    <a href="" class="label1 rs1" data-label1="hot">New</a>
                 </li>
 
                 <li class="{{ Route::is('blogs.index') ? 'active-menu' : '' }}">
