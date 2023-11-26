@@ -24,7 +24,7 @@
             </h4>
 
             <span class="mtext-106 cl2">
-                Giá: ${{ $product->price }}
+                Giá: {{ $product->price }}vnđ
             </span>
 
             <p class="stext-102 cl3 p-t-23">

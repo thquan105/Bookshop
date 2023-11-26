@@ -58,7 +58,7 @@
                         </h4>
 
                         <span class="mtext-106 cl2">
-                            ${{ $product->price }}
+                            {{ $product->price }} vnđ
                         </span>
 
                         <p class="stext-102 cl3 p-t-23">
@@ -76,7 +76,7 @@
                                             <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
-
+                                            <input type="hidden" name="imgproduct" >
                                             <input class="mtext-104 cl3 txt-center num-product" type="number"
                                                 name="quantity" value="1" id="quantityInput" min="1">
 
@@ -96,7 +96,7 @@
                         <!--  -->
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                             <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#" product-slug="{{ $product->slug }}"
+                                <a href="#"
                                     class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
                                     data-tooltip="Add to Wishlist">
                                     <i class="zmdi zmdi-favorite"></i>

@@ -113,7 +113,7 @@
 
                                 <div class="size-209 p-t-1">
                                     <span class="mtext-110 cl2">
-                                        {{ Cart::instance('cart')->subtotal() }}đ
+                                        {{ Cart::instance('cart')->subtotal() }} vnđ
                                     </span>
                                 </div>
                             </div>
