@@ -9,8 +9,6 @@ use App\Models\Category;
 use App\Models\Slide;
 
 
-use App\Models\Slide;
-
 class HomeController extends Controller
 {
     public function index()
