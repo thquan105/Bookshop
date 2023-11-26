@@ -23,13 +23,11 @@ Route::get('wishlists', function () {
     return view('frontend.wishlists.index');
 })->name('wishlists.index');
 
-// Route::get('products', function () {
-//     return view('frontend.products.index');
-// })->name('products.index');
 
-// Route::get('products/detail', function () {
-//     return view('frontend.products.detail');
-// })->name('products.detail');
+Route::post('/Checkout/OnlineCheckout', [App\Http\Controllers\Frontend\OnlineCheckoutController::class, 'online_checkout'])->name('cart.confirmCheckout');
+
+
+
 
 Route::get('carts', function () {
     return view('frontend.carts.index');

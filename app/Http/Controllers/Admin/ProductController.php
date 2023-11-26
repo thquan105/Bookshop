@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     use ImageUploadingTrait;
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      */
     public function index()
     {
