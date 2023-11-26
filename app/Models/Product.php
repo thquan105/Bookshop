@@ -14,7 +14,7 @@ class Product extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, Sluggable;
 
     protected $guarded = ['id','created_at', 'updated_at'];
-
+ 
     protected $appends = ['gallery'];
 
     /**

@@ -27,13 +27,11 @@ Route::get('/product/quick-view/{product:slug}', [\App\Http\Controllers\Frontend
 //     return view('frontend.wishlists.index');
 // })->name('wishlists.index');
 
-// Route::get('products', function () {
-//     return view('frontend.products.index');
-// })->name('products.index');
 
-// Route::get('products/detail', function () {
-//     return view('frontend.products.detail');
-// })->name('products.detail');
+Route::post('/Checkout/OnlineCheckout', [App\Http\Controllers\Frontend\OnlineCheckoutController::class, 'online_checkout'])->name('cart.confirmCheckout');
+
+
+
 
 Route::get('carts', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('carts.index');
 Route::post('/carts/store', [\App\Http\Controllers\Frontend\CartController::class, 'addToCart'])->name('carts.store');

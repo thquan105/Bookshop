@@ -16,7 +16,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            {{-- {{ route('admin.products.store') }} --}}
+                            {{-- {{ route('admin.products.store') }} --}} 
                             <form action="{{ route('admin.products.store') }}" method="post">
                                 @csrf
                                 <div class="form-group">

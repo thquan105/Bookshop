@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         switch($this->method()){
-            case "POST":
+            case "POST": 
                 return [
                     'name' => ['required'],
                     'category_id' => ['required'],
