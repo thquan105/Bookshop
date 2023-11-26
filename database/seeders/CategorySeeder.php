@@ -23,13 +23,7 @@ class CategorySeeder extends Seeder
             'id' => 2,
             'name' => 'Sách văn học',
             'slug' => '',
-            'parent_id' => 1
-        ]);
-        Category::create([
-            'id' => 3,
-            'name' => 'Sách kinh tế',
-            'slug' => '',
-            'parent_id' => 1
+            'parent_id' => null
         ]);
     }
 }

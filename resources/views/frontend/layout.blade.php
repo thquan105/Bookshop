@@ -5,6 +5,8 @@
     <title>@yield('title') | Book Shop</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <!--===============================================================================================-->
@@ -129,14 +131,12 @@
                             <i class="zmdi zmdi-search"></i>
                         </div>
 
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                            data-notify="2">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="3">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
 
                         <a href="{{ route('wishlists.index') }}"
-                            class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                            data-notify="0">
+                            class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti wishlist-count" data-notify="0">
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
                     </div>
@@ -163,7 +163,7 @@
                 </div>
 
                 <a href="{{ route('wishlists.index') }}"
-                    class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
+                    class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti wishlist-count"
                     data-notify="0">
                     <i class="zmdi zmdi-favorite-outline"></i>
                 </a>
@@ -269,7 +269,6 @@
                     class="stext-104 cl4 hov-cl1 trans-04 js-name-b2" aria-label="close">Change Password Now >>></a>
             </div>
         </div>
-        </section>
     @endif
 
     <!-- Content page -->
@@ -503,30 +502,7 @@
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/vendor/sweetalert/sweetalert.min.js') }}"></script>
     <script>
-        $('.js-addwish-b2').on('click', function(e) {
-            e.preventDefault();
-        });
-
-        $('.js-addwish-b2').each(function() {
-            var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-            $(this).on('click', function() {
-                swal(nameProduct, "is added to wishlist !", "success");
-
-                $(this).addClass('js-addedwish-b2');
-                $(this).off('click');
-            });
-        });
-
-        $('.js-addwish-detail').each(function() {
-            var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-            $(this).on('click', function() {
-                swal(nameProduct, "is added to wishlist !", "success");
-
-                $(this).addClass('js-addedwish-detail');
-                $(this).off('click');
-            });
-        });
+        
 
         /*---------------------------------------------*/
 
@@ -556,6 +532,7 @@
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
     @stack('script-alt')
 
 </body>
