@@ -131,12 +131,12 @@
                             <i class="zmdi zmdi-search"></i>
                         </div>
 
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="3">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
 
                         <a href="{{ route('wishlists.index') }}"
-                            class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                            class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti wishlist-count" data-notify="0">
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
                     </div>
@@ -163,7 +163,7 @@
                 </div>
 
                 <a href="{{ route('wishlists.index') }}"
-                    class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
+                    class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti wishlist-count"
                     data-notify="0">
                     <i class="zmdi zmdi-favorite-outline"></i>
                 </a>
@@ -502,80 +502,7 @@
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/vendor/sweetalert/sweetalert.min.js') }}"></script>
     <script>
-        $('.js-addwish-b2').on('click', function(e) {
-            e.preventDefault();
-
-        });
-
-        $('.js-addwish-b2').each(function() {
-            var product_slug = $(this).attr("product-slug");
-            $(this).on('click', function() {
-                
-
-                $.ajax({
-                    type: "POST",
-                    url: "/wishlists",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr("content"),
-                        product_slug: product_slug,
-                    },
-                    success: function(response) {
-                        if (response.status == 401) {
-                            window.location = '/login';
-                        } else {
-                            swal(response, "is added to wishlist !", "success");
-                            $(this).off('click');
-                        }
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        if (xhr.status == 401) {
-                            console.log(xhr);
-                            window.location = '/login';
-                        }
-
-                        if (xhr.status == 422) {
-                            alert(xhr.responseText);
-                        }
-                    },
-                });
-                $(this).addClass('js-addedwish-b2');
-            });
-        });
-
-        $('.js-addwish-detail').each(function() {
-            var product_slug = $(this).attr("product-slug");
-            $(this).on('click', function() {
-                
-
-                $.ajax({
-                    type: "POST",
-                    url: "/wishlists",
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr("content"),
-                        product_slug: product_slug,
-                    },
-                    success: function(response) {
-                        if (response.status == 401) {
-                            window.location = '/login';
-                        } else {
-                            swal(response, "is added to wishlist !", "success");
-                            $(this).off('click');
-                        }
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        if (xhr.status == 401) {
-                            console.log(xhr);
-                            window.location = '/login';
-                        }
-
-                        if (xhr.status == 422) {
-                            alert(xhr.responseText);
-                        }
-                    },
-                });
-                $(this).addClass('js-addedwish-detail');
-            });
-        });
+        
 
         /*---------------------------------------------*/
 
@@ -605,6 +532,7 @@
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
     @stack('script-alt')
 
 </body>

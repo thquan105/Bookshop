@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
     })->middleware('throttle:6,1')->name('verification.resend');
 
     Route::resource('wishlists', \App\Http\Controllers\Frontend\WishListController::class)->only(['index','store','destroy']);
+    Route::get('load-wishlist-count', [\App\Http\Controllers\Frontend\WishListController::class, 'wishlistCount']);
 });
 
 Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {

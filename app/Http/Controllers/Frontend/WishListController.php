@@ -68,4 +68,12 @@ class WishListController extends Controller
             'alert-type' => 'danger'
         ]);
     }
+
+    public function wishlistCount()
+    {
+        $wishlistcount = WishList::where('user_id', auth()->id())->count();
+        return response()->json([
+            'count' => $wishlistcount
+        ]);
+    }
 }
