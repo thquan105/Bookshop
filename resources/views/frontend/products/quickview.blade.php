@@ -33,20 +33,26 @@
 
             <!--  -->
             <div class="p-t-33">
+                <form id="addtocart" method="post" action="{{ route('carts.store') }}">
+                    @csrf
 
-                <div class="flex-w flex-r-m p-b-10">
-                    <div class="size-204 flex-w flex-m respon6-next">
-                        <div style="width: 90px" class="wrap-num-product flex-w m-r-20 m-tb-10">
-                            <input class="mtext-104 cl3 txt-center" min="0" max="100" type="number" name="num-product"
-                                value="1">
-                        </div>
-
-                        <button
-                            class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                            Add to cart
-                        </button>
-                    </div>
-                </div>
+                    <div class="flex-w flex-r-m p-b-10">
+                        <div class="size-204 flex-w flex-m respon6-next">
+                            <div style="width: 90px" class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                <input class="mtext-104 cl3 txt-center" min="0" max="100" type="number"
+                                    name="quantity" id="quantityInput" value="1">
+                            </div>
+                            <a href="javascript:void(0)" id="cartEffect" class="btn"
+                                onclick="event.preventDefault();document.getElementById('addtocart').submit();">
+                                <button
+                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                    Add to cart
+                                </button>
+                            </a>
+                            <input type="hidden" name="id" value="{{ $product->id }}">
+                </form>
             </div>
         </div>
+    </div>
+    </div>
     </div>
