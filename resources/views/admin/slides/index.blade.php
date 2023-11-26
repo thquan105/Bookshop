@@ -28,7 +28,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @forelse ($slides->sortBy('position') as $slide)
+                        @forelse ($slides as $slide)
                             <tr>    
                                 <td>{{ $slide->position }}</td>
                                 <td>{{ $slide->title }}</td>
