@@ -9,14 +9,30 @@ use Cart;
 
 class CartController extends Controller
 {
-    public function index()
-    {
-		// Cart::destroy();
+	public function index()
+	{
 		$items = Cart::instance('cart')->content();
 
-		return view('frontend.carts.index', ['items'=>$items]);
-    }
+		if ($items->isNotEmpty()) {
+			$firstItem = $items->first();
 
+			if ($firstItem->model && $firstItem->model->name) {
+				return view('frontend.carts.index', ['items' => $items]);
+			} else {
+				$items->each(function ($item, $rowId) {
+					Cart::instance('cart')->remove($rowId);
+				});
+				return view('frontend.carts.index', ['items' => $items]);
+			}
+		} else {
+			$items->each(function ($item, $rowId) {
+				Cart::instance('cart')->remove($rowId);
+			});
+			return view('frontend.carts.index', ['items' => $items]);
+		}
+	}
+
+	
 	public function addToCart(Request $request)
 	{
 		$product = Product::find($request->id);
