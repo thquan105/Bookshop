@@ -77,7 +77,6 @@
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        {{--  --}}
                         <a href="{{ route('admin.orders.index') }}" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Order</p>

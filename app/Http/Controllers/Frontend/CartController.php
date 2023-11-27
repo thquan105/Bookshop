@@ -38,7 +38,7 @@ class CartController extends Controller
 		$product = Product::find($request->id);
 		
 		Cart::instance('cart')->add($product->id, $product->name, $request->quantity,$product->price)->associate('App\Models\Product');
-		return redirect()->route('carts.index')->with([
+		return redirect()->back()->with([
             'message' => 'Thêm thành công !',
             'alert-type' => 'success'
         ]);
