@@ -46,7 +46,7 @@ class OnlineCheckoutController extends Controller
     {
         $params = $request->except('_token');
 
-        $baseTotalPrice = Cart::instance('cart')->subtotal();
+        $baseTotalPrice = Cart::instance('cart')->subtotal(0, '', '');
         $shippingCost = 10000;
         $grandTotal = $baseTotalPrice + $shippingCost;
 

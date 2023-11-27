@@ -26,12 +26,12 @@ class CheckoutRequest extends FormRequest
         return [           
             'first_name' => ['required'],
             'last_name' => ['required'],
-            'address1' => ['nullable'],
-            'address2' => ['nullable'],
-            'province_id' => ['nullable'],
-            'city_id' => ['nullable'],
-            'postcode' => ['nullable'],
-            'phone' => ['nullable'],
+            'address1' => ['required'],
+            'address2' => ['required'],
+            'province_id' => ['required'],
+            'city_id' => ['required'],
+            'postcode' => ['required'],
+            'phone' => ['required'],
             'email' => ['required', 'string', 'max:255', Rule::unique('users')->ignore(Auth::user())],
         ];
     }

@@ -92,6 +92,8 @@ Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin', 'as' => 'admin.'],
 
     Route::get('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
+
+    Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class)->only(['index','show','destroy']);
     
 });
 

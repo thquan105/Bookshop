@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Cart;
 use App\Models\Order;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {
@@ -13,12 +14,13 @@ class PaymentController extends Controller
     {
         if (isset($_GET['partnerCode'])) {
             //Thành Công
+
             if ($_GET['resultCode'] == 0) {
+                Session::forget('cart');
                 $latestId = Order::max('id');
                 $order = Order::find($latestId);
                 $order->payment_status = Order::PAID;
                 $order->save();
-                Cart::destroy();
                 return view('frontend.carts.thanks');
             } else {
                 //Thất Bại
