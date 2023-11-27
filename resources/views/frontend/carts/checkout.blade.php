@@ -20,6 +20,13 @@
             </span>
         </div>
     </div>
+    @if (isset($message))
+        <div class="alert alert-danger">
+            <div class="container">
+                {{ $message }}
+            </div>
+        </div>
+    @endif
 
     <!-- Checkout Start -->
     <div class="container-fluid pt-5">
@@ -35,48 +42,79 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label>First Name</label>
-                                <input class="form-control" type="text" name="FirstName" placeholder="John">
+                                <input class="form-control" type="text" name="first_name" value="{{ auth()->user()->first_name }}">
+                                @error('first_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Last Name</label>
-                                <input class="form-control" type="text" name="LastName" placeholder="Doe">
+                                <input class="form-control" type="text" name="last_name" value="{{ auth()->user()->last_name }}">
+                                @error('last_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>E-mail</label>
-                                <input class="form-control" type="text" name="Email" placeholder="example@email.com">
+                                <input class="form-control" type="text" name="email" value="{{ auth()->user()->email }}">
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Mobile No</label>
-                                <input class="form-control" type="text" name="MobileNo" placeholder="+123 456 789">
+                                <input class="form-control" type="text" name="phone" value="{{ auth()->user()->phone }}">
+                                @error('phone')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Address Line 1</label>
-                                <input class="form-control" type="text" name="Address1" placeholder="123 Street">
+                                <textarea class="form-control" name="address1" rows="5">{{ auth()->user()->address1 }}</textarea>
+                                @error('address1')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Address Line 2</label>
-                                <input class="form-control" type="text" name="Address2" placeholder="123 Street">
+                                <textarea class="form-control" name="address2" rows="5">{{ auth()->user()->address2 }}</textarea>
+                                @error('address2')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Country</label>
-                                <select class="custom-select" name="country">
-                                    <option selected>United States</option>
-                                    <option>Afghanistan</option>
-                                    <option>Albania</option>
-                                    <option>Algeria</option>
+                                <label>Province <span class="required">*</label>
+                                    <select class="form-control" name="province_id" id="province-id"
+                                    value="{{ auth()->user()->province_id }}">
+                                    <option value="">Select Province</option>
+                                    @foreach ($provinces as $province => $pro)
+                                        <option {{ auth()->user()->province_id == $province ? 'selected' : null }}
+                                            value="{{ $province }}">{{ $pro }}</option>
+                                    @endforeach
                                 </select>
+                                @error('province_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>City</label>
-                                <input class="form-control" type="text" name="City" placeholder="New York">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>State</label>
-                                <input class="form-control" type="text" name="State" placeholder="New York">
+                                <label>City <span class="required">*</span></label>
+                                <select class="form-control" name="city_id" id="city-id" value="{{ auth()->user()->city_id }}">
+                                    <option value="">Select City</option>
+                                    @foreach ($cities as $city => $ty)
+                                        <option {{ auth()->user()->city_id == $city ? 'selected' : null }}
+                                            value="{{ $city }}">{{ $ty }}</option>
+                                    @endforeach
+                                </select>
+                                @error('city_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>ZIP Code</label>
-                                <input class="form-control" type="text" name="ZipCode" placeholder="123">
+                                <input class="form-control" type="text" name="postcode" value="{{ auth()->user()->postcode }}">
+                                @error('postcode')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -111,7 +149,8 @@
                         <div class="card-footer border-secondary bg-transparent">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5 class="font-weight-bold">Total</h5>
-                                <h5 id="totalAmount" class="font-weight-bold form-group">{{ Cart::instance('cart')->subtotal() + 10000 }} vnđ</h5>
+                                <h5 id="totalAmount" class="font-weight-bold form-group">
+                                    {{ Cart::instance('cart')->subtotal() + 10000 }} vnđ</h5>
                             </div>
                         </div>
                     </div>
@@ -125,20 +164,20 @@
                             <div class="form-group ml-4">
                                 <div class="form-check">
                                     <input type="radio" class="form-check-input payUrl" name="payment" id="paypal"
-                                        checked>
+                                        checked onchange="updatePlaceOrderButtonName()">
                                     <label class="form-check-label" for="paypal">Momo</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-check ml-4">
                                     <input type="radio" class="form-check-input payLater" name="payment"
-                                        id="directcheck">
+                                        id="directcheck" onchange="updatePlaceOrderButtonName()">
                                     <label class="form-check-label" for="directcheck">Thanh toán khi nhận hàng</label>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer border-secondary bg-transparent">
-                            <button type="submit" name="payUrl" onclick="submitForm()"
+                            <button type="submit" name="payUrl" id="placeOrderButton"
                                 class="flex-c-m stext-101 cl0 size-116 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
                                 Place Order
                             </button>
@@ -151,3 +190,44 @@
     <!-- Checkout End -->
 
 @endsection
+@push('script-alt')
+    <script>
+        $('#province-id').on('change', function() {
+            var province_id = this.value;
+            $('#city-id').html('<option value="">Select City</option>');
+            if (province_id == null || province_id == '') {
+                return;
+            } else {
+                $.ajax({
+                    url: "{{ url('get-cities') }}",
+                    type: "POST",
+                    data: {
+                        province_id: province_id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#city-id').html('<option value="">Select City</option>');
+                        $.each(result.cities, function(key, value) {
+                            //console.log(value);
+                            $("#city-id").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        function updatePlaceOrderButtonName() {
+            var payUrlRadio = document.getElementById("paypal");
+            var placeOrderButton = document.getElementById("placeOrderButton");
+
+            if (payUrlRadio.checked) {
+                placeOrderButton.name = "payUrl";
+            } else {
+                placeOrderButton.name = "payLater";
+            }
+        }
+    </script>
+@endpush

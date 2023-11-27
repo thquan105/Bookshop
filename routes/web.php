@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/result', [App\Http\Controllers\Frontend\PaymentController::class, 'payment'])->name('payment');
 Route::get('/Home/{slug?}', [App\Http\Controllers\Frontend\HomeController::class, 'showProduct'])->name('home.product');
 Route::get('/shop/{slug?}', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('products.index');
 Route::get('/product/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('products.show');
@@ -65,6 +66,7 @@ Auth::routes();
 //login by google account
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login-by-google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+Route::post('get-cities', [\App\Http\Controllers\Frontend\OrderController::class, 'cities']);
 
 Route::group(['middleware' => 'auth'], function () {
     //The Email Verification Notice
@@ -111,7 +113,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::put('profile', [\App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('profile.update');
     Route::get('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'show'])->name('passwords.index');
     Route::put('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'change'])->name('passwords.change');
-    Route::post('get-cities', [\App\Http\Controllers\Frontend\OrderController::class, 'cities']);
+    
     
     
 });
