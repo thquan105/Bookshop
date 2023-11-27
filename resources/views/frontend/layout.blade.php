@@ -103,11 +103,11 @@
                                 </ul> --}}
                             </li>
 
-                            <li class="{{ Route::is('products.index') ? 'active-menu' : '' }}">
+                            <li class="label1 {{ Route::is('products.index') ? 'active-menu' : '' }}" data-label1="hot">
                                 <a href="{{ route('products.index') }}">Shop</a>
                             </li>
 
-                            <li class="label1 {{ Route::is('carts.index') ? 'active-menu' : '' }}" data-label1="hot">
+                            <li class="">
                                 <a href="">New</a>
                             </li>
 

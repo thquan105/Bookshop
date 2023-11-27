@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Http\Requests\CheckoutRequest;
+use Illuminate\Support\Facades\Session;
 
 class OnlineCheckoutController extends Controller
 {
@@ -124,6 +125,7 @@ class OnlineCheckoutController extends Controller
 
 
         if($request->has('payLater')){
+            Session::forget('cart');
             return view('frontend.carts.thanks');
         }elseif($request->has('payUrl')){
             $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";

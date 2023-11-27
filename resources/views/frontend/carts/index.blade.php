@@ -3,6 +3,12 @@
 @section('title', 'Cart')
 
 @section('content')
+    <!-- Title page -->
+    <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('{{ asset('images/bg-01.jpg') }}');">
+        <h2 class="ltext-105 cl0 txt-center">
+            Shoping Cart
+        </h2>
+    </section>
 
     <!-- breadcrumb -->
     <div class="container">
@@ -103,7 +109,7 @@
                                 Cart Totals
                             </h4>
 
-                            
+
                             <div class="flex-w flex-t p-t-27 p-b-33">
                                 <div class="size-208">
                                     <span class="mtext-101 cl2">
