@@ -260,8 +260,6 @@
             </div>
         </div>
     </header>
-    <!-- Cart sidebar -->
-    @include('frontend.carts.cart')
 
     @if (session()->has('alert'))
         <div class="alert alert-success">

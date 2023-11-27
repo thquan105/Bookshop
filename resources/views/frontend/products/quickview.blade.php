@@ -50,9 +50,9 @@
                                 </button>
                             </a>
                             <input type="hidden" name="id" value="{{ $product->id }}">
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
-    </div>
-    </div>
     </div>
