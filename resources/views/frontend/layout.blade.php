@@ -287,25 +287,25 @@
                     <ul>
                         <li class="p-b-10">
                             <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Women
+                                Sách
                             </a>
                         </li>
 
                         <li class="p-b-10">
                             <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Men
+                                Truyện
                             </a>
                         </li>
 
                         <li class="p-b-10">
                             <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Shoes
+                                Văn học
                             </a>
                         </li>
 
                         <li class="p-b-10">
                             <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Watches
+                                Kinh tế
                             </a>
                         </li>
                     </ul>
@@ -349,8 +349,8 @@
                     </h4>
 
                     <p class="stext-107 cl7 size-201">
-                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us
-                        on (+1) 96 716 6879
+                        Any questions? Let us know in store at 48 Cao Thang, Thanh Binh, Hai Chau, Da Nang, Viet Nam or call us
+                        on (+1) 234 1234567
                     </p>
 
                     <div class="p-t-27">

@@ -83,13 +83,6 @@
                             <p>Order</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        {{-- {{ route('admin.shipments.index') }} --}}
-                        <a href="" class="nav-link">
-                            <i class="fa fa-plus nav-icon"></i>
-                            <p>Pengiriman</p>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -102,24 +95,10 @@
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        {{-- {{ route('admin.reports.revenue') }} --}}
-                        <a href="" class="nav-link">
-                            <i class="fa fa-plus nav-icon"></i>
-                            <p>Keuntungan</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         {{-- {{ route('admin.reports.product') }} --}}
                         <a href="" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
-                            <p>Produk</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        {{-- {{ route('admin.reports.inventory') }} --}}
-                        <a href="" class="nav-link">
-                            <i class="fa fa-plus nav-icon"></i>
-                            <p>Inventory</p>
+                            <p>Product</p>
                         </a>
                     </li>
                     <li class="nav-item">

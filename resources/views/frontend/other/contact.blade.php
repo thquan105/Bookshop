@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- Title page -->
-    <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+    <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('{{ asset('frontend/images/bg-01.jpg') }}');">
         <h2 class="ltext-105 cl0 txt-center">
             Contact
         </h2>
@@ -25,7 +25,7 @@
                         <div class="bor8 m-b-20 how-pos4-parent">
                             <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email"
                                 placeholder="Your Email Address">
-                            <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+                            <img class="how-pos4 pointer-none" src="{{ asset('frontend/images/icons/icon-email.png') }}" alt="ICON">
                         </div>
 
                         <div class="bor8 m-b-30">
@@ -50,7 +50,7 @@
                             </span>
 
                             <p class="stext-115 cl6 size-213 p-t-18">
-                                Coza Store Center 8th floor, 379 Hudson St, New York, NY 10018 US
+                                48 Cao Thắng, Thanh Bình, Hải Châu, Đà Nẵng, Việt Nam
                             </p>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                             </span>
 
                             <p class="stext-115 cl1 size-213 p-t-18">
-                                +1 800 1236879
+                                +1 234 1234567
                             </p>
                         </div>
                     </div>

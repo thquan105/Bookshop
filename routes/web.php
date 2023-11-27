@@ -16,29 +16,6 @@ use Illuminate\Http\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
-Route::get('/result', [App\Http\Controllers\Frontend\PaymentController::class, 'payment'])->name('payment');
-Route::get('/Home/{slug?}', [App\Http\Controllers\Frontend\HomeController::class, 'showProduct'])->name('home.product');
-Route::get('/shop/{slug?}', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('products.index');
-Route::get('/product/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('products.show');
-Route::get('/product/quick-view/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'quickView']);
-
-// Route::get('wishlists', function () {
-//     return view('frontend.wishlists.index');
-// })->name('wishlists.index');
-
-
-Route::post('/Checkout/OnlineCheckout', [App\Http\Controllers\Frontend\OnlineCheckoutController::class, 'online_checkout'])->name('cart.confirmCheckout');
-
-
-
-Route::get('carts', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('carts.index');
-Route::post('/carts/store', [\App\Http\Controllers\Frontend\CartController::class, 'addToCart'])->name('carts.store');
-Route::put('/carts/update', [\App\Http\Controllers\Frontend\CartController::class, 'update'])->name('carts.update');
-Route::get('/carts/remove/{cartId}', [\App\Http\Controllers\Frontend\CartController::class, 'destroy']);
-
-
 Route::get('about', function () {
     return view('frontend.other.about');
 })->name('about');
@@ -63,11 +40,23 @@ Route::get('blogs/detail', function () {
 
 Auth::routes();
 
+Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/result', [App\Http\Controllers\Frontend\PaymentController::class, 'payment'])->name('payment');
+
 //login by google account
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login-by-google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+//Cart
+Route::get('carts', [\App\Http\Controllers\Frontend\CartController::class, 'index'])->name('carts.index');
+Route::post('/carts/store', [\App\Http\Controllers\Frontend\CartController::class, 'addToCart'])->name('carts.store');
+Route::put('/carts/update', [\App\Http\Controllers\Frontend\CartController::class, 'update'])->name('carts.update');
+Route::get('/carts/remove/{cartId}', [\App\Http\Controllers\Frontend\CartController::class, 'destroy']);
+//product
+Route::get('/Home/{slug?}', [App\Http\Controllers\Frontend\HomeController::class, 'showProduct'])->name('home.product');
+Route::get('/shop/{slug?}', [App\Http\Controllers\Frontend\ShopController::class, 'index'])->name('products.index');
+Route::get('/product/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('products.show');
+Route::get('/product/quick-view/{product:slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'quickView']);
 Route::post('get-cities', [\App\Http\Controllers\Frontend\OrderController::class, 'cities']);
-
 Route::group(['middleware' => 'auth'], function () {
     //The Email Verification Notice
     Route::get('/email/verify', function () {
@@ -87,11 +76,10 @@ Route::group(['middleware' => 'auth'], function () {
     })->middleware('throttle:6,1')->name('verification.resend');
 
     Route::resource('wishlists', \App\Http\Controllers\Frontend\WishListController::class)->only(['index','store','destroy']);
-    Route::get('load-wishlist-count', [\App\Http\Controllers\Frontend\WishListController::class, 'wishlistCount']);
-    Route::get('carts/checkout', [\App\Http\Controllers\Frontend\OnlineCheckoutController::class, 'index'])->name('carts.checkout');
+    Route::get('load-wishlist-count', [\App\Http\Controllers\Frontend\WishListController::class, 'wishlistCount']);  
 });
 
-Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     // admin
     Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
@@ -107,13 +95,12 @@ Route::group(['middleware' => ['auth', 'isAdmin'], 'prefix' => 'admin', 'as' => 
     
 });
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
-    //user
+Route::group(['middleware' => 'verified'], function () {
+    //user verified
     Route::get('profile', [\App\Http\Controllers\Auth\ProfileController::class, 'index'])->name('profile.index');
     Route::put('profile', [\App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('profile.update');
     Route::get('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'show'])->name('passwords.index');
     Route::put('passwords/change', [\App\Http\Controllers\Auth\ProfileController::class, 'change'])->name('passwords.change');
-    
-    
-    
+    Route::get('carts/checkout', [\App\Http\Controllers\Frontend\OnlineCheckoutController::class, 'index'])->name('carts.checkout');
+    Route::post('/Checkout/OnlineCheckout', [App\Http\Controllers\Frontend\OnlineCheckoutController::class, 'online_checkout'])->name('cart.confirmCheckout');
 });

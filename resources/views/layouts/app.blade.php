@@ -126,7 +126,7 @@
                 Anything you want
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2022-2025 <a href="">Furin.com</a>.</strong> All rights
+            <strong>Copyright &copy; 2022-2025 <a href="">Furin.com></a>.</strong> All rights
             reserved.
         </footer>
     </div>
