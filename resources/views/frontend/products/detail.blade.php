@@ -66,32 +66,29 @@
                         </p>
 
                         <!--  -->
-                        <div class="p-t-33">
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-204 flex-w flex-m respon6-next">
-                                
-                                    <form id="addtocart" method="post" action="{{route('carts.store')}}">
-                                        @csrf
+                        <form id="addtocart" method="post" action="{{route('carts.store')}}">
+                            @csrf
+                            <div class="p-t-33">
+                                <div class="flex-w flex-r-m p-b-10">
+                                    <div class="size-204 flex-w flex-m respon6-next">
                                         <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                <i class="fs-16 zmdi zmdi-minus"></i>
-                                            </div>
-                                            <input type="hidden" name="imgproduct" >
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                name="quantity" value="1" id="quantityInput" min="1">
-
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" onclick="limitValue()">
-                                                <i class="fs-16 zmdi zmdi-plus"></i>
-                                            </div>
+                                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                    <i class="fs-16 zmdi zmdi-minus"></i>
+                                                </div>
+                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                        name="quantity" value="1" id="quantityInput" min="1">
+                                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" onclick="limitValue()">
+                                                    <i class="fs-16 zmdi zmdi-plus"></i>
+                                                </div>
                                         </div>
                                         <a href="javascript:void(0)" id="cartEffect" class="btn" onclick="event.preventDefault();document.getElementById('addtocart').submit();">
                                             <span class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart">Add to card</span>
                                         </a>
                                         <input type="hidden" name="id" value="{{$product->id}}"> 
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
 
                         <!--  -->
                         <div class="flex-w flex-m p-l-100 p-t-40 respon7">
@@ -154,22 +151,3 @@
         </div>
     </section>
 @endsection
-@push('script-alt')
-<script>
-    document.getElementById('quantityInput').addEventListener('input', function() {
-        var max = 5;
-        if (this.value > max) {
-            this.value = max;
-        }
-    });
-    function limitValue() {
-        var inputElement = document.getElementById('quantityInput');
-        var currentValue = parseInt(inputElement.value);
-
-        if (currentValue > {{$product->quantity}}-1) {
-            inputElement.value = {{$product->quantity}}-1;            
-        }
-        
-    }
-</script>
-@endpush

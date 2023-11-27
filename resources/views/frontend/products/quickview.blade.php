@@ -39,8 +39,8 @@
                     <div class="flex-w flex-r-m p-b-10">
                         <div class="size-204 flex-w flex-m respon6-next">
                             <div style="width: 90px" class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                <input class="mtext-104 cl3 txt-center" min="0" max="100" type="number"
-                                    name="quantity" id="quantityInput" value="1">
+                                <input class="mtext-104 cl3 txt-center" min="1" max="100" type="number"
+                                    name="quantity" id="quantityInput" value="1" >
                             </div>
                             <a href="javascript:void(0)" id="cartEffect" class="btn"
                                 onclick="event.preventDefault();document.getElementById('addtocart').submit();">
