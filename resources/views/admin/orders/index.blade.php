@@ -8,6 +8,8 @@
             </h6>
         </div>
         <div class="table-responsive">
+        <a href="{{ route('admin.exportOrders') }}" class="btn btn-success shadow-sm " style="margin-left: 5px; margin-top: 5px;margin-bottom: 5px;"> <i
+                                    class="fa">Export</i></a>
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
@@ -57,6 +59,7 @@
                     @endforelse
                 </tbody>
             </table>
+
         </div>
     </div>
 @endsection

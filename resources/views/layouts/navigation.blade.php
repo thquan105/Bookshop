@@ -94,19 +94,12 @@
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        {{-- {{ route('admin.reports.product') }} --}}
-                        <a href="" class="nav-link">
+                        <a href="{{ route('admin.reportProducts.index') }}" class="nav-link">
                             <i class="fa fa-plus nav-icon"></i>
                             <p>Product</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        {{-- {{ route('admin.reports.payment') }} --}}
-                        <a href="" class="nav-link">
-                            <i class="fa fa-plus nav-icon"></i>
-                            <p>Payment</p>
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
         </ul>

@@ -94,7 +94,10 @@ Route::group(['middleware' => 'isAdmin', 'prefix' => 'admin', 'as' => 'admin.'],
     Route::put('profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class)->only(['index','show','destroy']);
-    
+
+    Route::get('reportProducts', [\App\Http\Controllers\Admin\OrderController::class, 'reportProducts'])->name('reportProducts.index');    
+    Route::get('exportProducts', [\App\Http\Controllers\Admin\OrderController::class, 'exportProducts'])->name('exportProducts');;
+    Route::get('exportOrders', [\App\Http\Controllers\Admin\OrderController::class, 'exportOrders'])->name('exportOrders');;
 });
 
 Route::group(['middleware' => 'verified'], function () {

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrdersExport;
+use App\Exports\ProductExport;
 
 class OrderController extends Controller
 {
@@ -34,6 +37,11 @@ class OrderController extends Controller
         return view('admin.orders.show', compact('order', 'orderItems'));
     }
 
+    public function reportProducts()
+    {
+        $orderItems = OrderItem::all();
+        return view('admin.report.products.index', compact('orderItems'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -56,5 +64,14 @@ class OrderController extends Controller
             'message' => 'Success deleted !',
             'alert-type' => 'danger'
         ]);    ;
+    }
+
+    public function exportOrders()
+    {
+        return Excel::download(new OrdersExport, 'orders.xlsx');
+    }
+    public function exportProducts()
+    {
+        return Excel::download(new ProductExport, 'Products.xlsx');
     }
 }
