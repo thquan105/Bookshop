@@ -1,5 +1,14 @@
 # Laravel 10 - Website Bookshop
 
+## Screenshots - User
+
+![preview img](/preview.jpg)
+
+## Screenshots - Admin
+
+![Admin img](/Admin.JPG)
+
+
 
 ## Donwload
 
@@ -35,3 +44,9 @@ Clone Project
 
 -   email = admin@admin.com
 -   password = 123
+
+## Template
+- Admin Dashboard Template AdminLTE.IO
+https://adminlte.io/
+- User - Template Bootstrap 
+https://themewagon.com/themes/free-html5-ecommerce-website-template/
