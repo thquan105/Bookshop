@@ -2,7 +2,7 @@
 
 ## Screenshots - User
 
-![preview img](/preview.jpg)
+![preview img](/preview.JPG)
 
 ## Screenshots - Admin
 
