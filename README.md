@@ -9,6 +9,24 @@
 ![Admin img](/Admin.JPG)
 
 
+## Thành Viên
+- Trần Hoàng Quân (NT) - 2050531200258
+- Trần Văn Chính - 2050531200112
+- Phạm Khắc Tưởng - 2050531200328
+
+## Chức năng
+- Login/Register, Logout
+- Login with social
+- Forgot Password
+- Verify Email
+- CRUD giỏ hàng
+- CRUD profile
+- Change Password
+- Wishlist Sản phẩm
+- Tích hợp thanh toán online
+- CRUD Categoty
+- CRUD Book
+- Export file
 
 ## Donwload
 
@@ -19,6 +37,7 @@ Clone Project
 ```
 
 -   Copy .env.example into .env then edit the database and api key
+
 - Install composer
 ```bash
     composer install
