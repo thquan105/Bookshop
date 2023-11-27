@@ -206,7 +206,7 @@
                                     </a>
 
                                     <span class="stext-105 cl3">
-                                        $ {{ $product->price }}
+                                         {{ $product->price }} vnđ
                                     </span>
                                 </div>
 

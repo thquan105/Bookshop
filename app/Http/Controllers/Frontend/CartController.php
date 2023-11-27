@@ -9,23 +9,39 @@ use Cart;
 
 class CartController extends Controller
 {
-    public function index()
-    {
-		// Cart::destroy();
+	public function index()
+	{
 		$items = Cart::instance('cart')->content();
 
-		return view('frontend.carts.index', ['items'=>$items]);
-    }
+		if ($items->isNotEmpty()) {
+			$firstItem = $items->first();
 
+			if ($firstItem->model && $firstItem->model->name) {
+				return view('frontend.carts.index', ['items' => $items]);
+			} else {
+				$items->each(function ($item, $rowId) {
+					Cart::instance('cart')->remove($rowId);
+				});
+				return view('frontend.carts.index', ['items' => $items]);
+			}
+		} else {
+			$items->each(function ($item, $rowId) {
+				Cart::instance('cart')->remove($rowId);
+			});
+			return view('frontend.carts.index', ['items' => $items]);
+		}
+	}
+
+	
 	public function addToCart(Request $request)
 	{
 		$product = Product::find($request->id);
 		
 		Cart::instance('cart')->add($product->id, $product->name, $request->quantity,$product->price)->associate('App\Models\Product');
-		return redirect()->back()->with([
-			'message' => 'Đã thêm sản phẩm thành công !',
-			'alert-type' => 'success'
-		]);
+		return redirect()->route('carts.index')->with([
+            'message' => 'Thêm thành công !',
+            'alert-type' => 'success'
+        ]);
 	}
 
 	public function update(Request $request)
@@ -39,7 +55,7 @@ class CartController extends Controller
 	{
 		Cart::instance('cart')->remove($id);
 
-		return redirect()->back()->with([
+		return redirect()->route('carts.index')->with([
 			'message' => 'Sản phẩm đã được xóa thành công !',
 			'alert-type' => 'danger'
 		]);

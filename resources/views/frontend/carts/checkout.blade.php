@@ -131,15 +131,15 @@
                             @foreach ($items as $item)
                                 <div class="d-flex justify-content-between">
                                     <p>{{ $item->model->name }}</p>
-                                    <p>${{ $item->price }} x {{ $item->qty }}</p>
-                                    <p>${{ $item->subtotal() }}</p>
+                                    <p>{{ $item->price }} vnđ x {{ $item->qty }}</p>
+                                    <p>{{ $item->subtotal(0,'','') }} vnđ</p>
                                 </div>
                             @endforeach
 
                             <hr class="mt-0">
                             <div class="d-flex justify-content-between mb-3 pt-1">
                                 <h6 class="font-weight-medium">Subtotal</h6>
-                                <h6 class="font-weight-medium">${{ Cart::instance('cart')->subtotal() }}</h6>
+                                <h6 class="font-weight-medium">{{ Cart::instance('cart')->subtotal(0, '', '') }} vnđ</h6>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Shipping</h6>
@@ -149,8 +149,7 @@
                         <div class="card-footer border-secondary bg-transparent">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5 class="font-weight-bold">Total</h5>
-                                <h5 id="totalAmount" class="font-weight-bold form-group">
-                                    {{ Cart::instance('cart')->subtotal() + 10000 }} vnđ</h5>
+                                <h5 id="totalAmount" class="font-weight-bold form-group">{{ Cart::instance('cart')->subtotal( 0, '','' )+10000 }} vnđ</h5>
                             </div>
                         </div>
                     </div>

@@ -58,10 +58,19 @@
                                             @endif
                                         </td>
                                         <td class="column-2">{{ $product->name }}</td>
-                                        <td class="column-3"><span class="amount">{{ $product->price }}</span>
+                                        <td class="column-3"><span class="amount">{{ $product->price }} vnđ</span>
                                         </td>
-                                        <td class="column-4"><a href="{{ url('product/' . $product->slug) }}"><button>Add
-                                                    to Cart</button></a></td>
+                                        <td class="column-4">
+                                            <form id="addtocart" method="post" action="{{route('carts.store')}}">
+                                                @csrf
+                                                <input type="hidden" name="quantity" value="1" id="quantityInput">
+                                                <input type="hidden" name="id" value="{{$product->id}}">
+                                                <a href="javascript:void(0)" id="cartEffect" class="btn" 
+                                                onclick="event.preventDefault();document.getElementById('addtocart').submit();">                                        
+                                                    <button>Add to Cart</button>
+                                                </a>
+                                            </form>
+                                        </td>
                                         <td class="column-5">
                                             <div class="remove">
                                                 <form action="{{ route('wishlists.destroy', $wishlist->id) }}"
