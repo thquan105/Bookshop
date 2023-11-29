@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\FacebookController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,10 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
 Route::get('/result', [App\Http\Controllers\Frontend\PaymentController::class, 'payment'])->name('payment');
+
+//login by facebook account
+Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('login-by-facebook');
+Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 
 //login by google account
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login-by-google');
